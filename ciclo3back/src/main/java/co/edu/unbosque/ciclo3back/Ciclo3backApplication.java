@@ -2,7 +2,7 @@ package co.edu.unbosque.ciclo3back;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+//Prueba2
 @SpringBootApplication
 public class Ciclo3backApplication {
 
