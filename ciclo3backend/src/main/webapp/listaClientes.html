@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Clientes</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    	$("#btnListarC").click(function(){
+        	$.get("http://localhost:8080/listaClientes", function(data, status){
+        		if (status == "success"){
+        			let longitud = data.length;
+        			let salidaDatos = "<table border ='1'>";
+        			salidaDatos = salidaDatos + "<tr><th>CEDULA</th><th>DIRECCIÓN</th><th>EMAIL</th><th>NOMBRE</th><th>TELEFONO</th></tr>";
+        			for(let i = 0; i < longitud; i++){
+        				salidaDatos = salidaDatos + "<tr>";
+        				salidaDatos = salidaDatos + "<td>"  + data[i].cedula_cliente + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].direccion_cliente + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].email_cliente + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].nombre_cliente + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].telefono_cliente + "</td>";
+        				salidaDatos = salidaDatos + "</tr>";
+        			}
+        			salidaDatos = salidaDatos + "</table>";
+        			$("#listaClientes").html(salidaDatos);
+        		}
+        	});	
+    	});	    	
+    	$("#btnBuscarCC").click(function(){
+    		let la_cc = $("#cedula").val();   // El .val asigna el valor de la variable cedula a cc
+    		$.post("http://localhost:8080/traerCliente", {cedula: la_cc}, function(data, status){
+    			let longitud = data.length;
+    			if (longitud > 0){
+    				$("#direccion").val(data[0].direccion_cliente);
+    				$("#email").val(data[0].email_cliente);
+    				$("#nombre").val(data[0].nombre_cliente);
+    				$("#telefono").val(data[0].telefono_cliente);
+    			}else{
+    				$("#mensaje").html("Cliente no encontrado.");
+    			}
+    		});
+    	});
+    	$("#btnCrear").click(function(){
+    		let la_cc = $("#cedula").val();
+    		let la_direccion = $("#direccion").val();
+    		let el_email = $("#email").val();
+    		let el_nombre = $("#nombre").val();
+    		let el_telefono = $("#telefono").val();
+    		$.post("http://localhost:8080/crearCliente", {cedula: la_cc, direccion: la_direccion, 
+    			email:el_email, nombre:el_nombre, telefono:el_telefono}, function(data,status){
+    				if (data == true){
+    					$("#mensaje").html("El cliente fue creado");
+    				}else{
+    					$("#mensaje").html("<b style = 'color:red;'>No se pudo crear, ya existe!</b>");
+    				}
+    				
+    			});
+    	});
+    	$("#btnBorrar").click(function(){
+    		let la_cc = $("#cedula").val();
+    		$.post("http://localhost:8080/borrarCliente", {cedula:la_cc}, function(data, status){
+    			if (data == true){
+    				$("#mensaje").html("El cliente fue eliminado");
+    			}else{
+    				$("#mensaje").html("<b style = 'color:red;'>No se pudo eliminar, NO existe!</b>");
+    			}
+    		});
+    	});
+    	$("#btnActualizar").click(function(){
+    		let la_cc = $("#cedula").val();
+    		let la_direccion = $("#direccion").val();
+    		let el_email = $("#email").val();
+    		let el_nombre = $("#nombre").val();
+    		let el_telefono = $("#telefono").val();
+    		$.post("http://localhost:8080//actualizarCliente", {cedula: la_cc, direccion: la_direccion, 
+    			email:el_email, nombre:el_nombre, telefono:el_telefono}, function(data, status){
+    				if (data == true){
+    					$("#mensaje").html("El cliente fue actualizado");
+    				}else{
+    					$("#mensaje").html("<b style = 'color:red;'>No se pudo actualizar, NO existe!</b>");
+    				}
+    			});
+    	});
+    });  //Esta cierra la etiqueta document
+</script>
+</head>
+<body>
+    <label>Cedula a buscar</label><input type = "text" id ="cedula"><button id = "btnBuscarCC">buscar</button><br>
+    <p id = "mensaje"></p>
+    <label>Dirección</label><input type = "text" id = "direccion"><br>
+    <label>Email</label><input type = "text" id = "email"><br>
+    <label>Nombre</label><input type = "text" id = "nombre"><br>
+    <label>Teléfono</label><input type = "text" id = "telefono"><br>
+    <button id = "btnListarC">Solicitar Listado</button>
+    <button id = "btnCrear">Crear cliente</button>
+    <button id = "btnBorrar">Borrar cliente</button>
+    <button id = "btnActualizar">Actualizar cliente</button>
+    <div id = "listaClientes"></div>
+</body>
+</html>
