@@ -4,10 +4,9 @@ import java.sql.*;
 
 public class Conexion {
 	static String db="tiendagenerica";
-	//static String login ="dba";
-	//static String password ="Mtic@2021";
-	static String login ="root";
-	static String password ="142308Jslp";
+	static String login ="dba";
+	static String password ="Mtic@2021";
+	
 	
 	static String url="jdbc:mysql://localhost/"+db;
 	

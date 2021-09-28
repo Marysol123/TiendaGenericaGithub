@@ -100,10 +100,12 @@ public class ClienteDAO {
 		boolean creado = false;
 		
 		if(! this.existeCliente(cliente.getCedula_cliente())) {
-			Conexion conexion = new Conexion();
 			
+			Conexion conexion = new Conexion();
 			try {
+				
 				Statement consulta = conexion.getConnection().createStatement();
+				
 				
 				String crearSql = "INSERT INTO clientes (cedula_cliente, direccion_cliente, email_cliente, nombre_cliente, telefono_cliente) "
 						+ " VALUES ("+cliente.getCedula_cliente()+", '"+cliente.getDireccion_cliente()+"', "
