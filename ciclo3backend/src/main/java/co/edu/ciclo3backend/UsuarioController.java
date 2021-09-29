@@ -49,11 +49,7 @@ public class UsuarioController {
 	    return dao.existeusuario(password, usuario);
 	}
 	
-	
-	
-	
-	
-	
+
 	
 	/*
 	@RequestMapping("/actualizarUsuario")
