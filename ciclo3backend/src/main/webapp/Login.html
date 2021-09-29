@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>User</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        	
+    	$("#btnLoginC").click(function(){
+    		let la_usuario = $("#usuario").val(); 
+    		let la_password = $("#password").val();
+    		
+    		
+    		// El .val asigna el valor de la variable cedula a cc
+    		$.post("http://localhost:8080/loginUsuario", {usuario: la_usuario,password:la_password}, function(data, status){
+    			let longitud = data.length;
+    			if (data == true){
+    				$("#mensaje").html("login exitosoo");
+    			}else{
+    				$("#mensaje").html("<b style = 'color:red;'>No se pudo eliminar, NO existe!</b>");
+    			}
+    		});
+    	});
+    	
+    	});
+
+   
+   
+</script>
+</head>
+<body>
+    <label>Usuario</label><input type = "text" id ="usuario"><br>
+    
+    <label>Password</label><input type = "text" id = "password">
+    <p id = "mensaje"></p>
+   
+    <button id = "btnLoginC">Login</button>
+    
+
+</body>
+</html>
