@@ -39,6 +39,8 @@ public class UsuarioDAO {
 	 * Busca un usuario por su cédula
 	 * @param cedula
 	 * @return ArrayList
+	 * 
+	 * 
 	 */
 	public ArrayList<UsuarioVO> buscarUsuarioCedula(String cedula){
 		 
