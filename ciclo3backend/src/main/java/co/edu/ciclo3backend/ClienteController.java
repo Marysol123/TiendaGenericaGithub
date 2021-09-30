@@ -2,6 +2,7 @@ package co.edu.ciclo3backend;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +13,7 @@ import co.edu.DTO.ciclo3backend.ClienteVO;
 public class ClienteController {
 	
 	@RequestMapping("/listaClientes")
+	@CrossOrigin(origins="*")
 	public ArrayList<ClienteVO> listaDeClientes(){
 	    ClienteDAO dao = new ClienteDAO();
 	    
@@ -19,6 +21,7 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("/traerCliente")
+	@CrossOrigin(origins="*")
 	public ArrayList<ClienteVO> buscarClienteCedula(String cedula){
 	    ClienteDAO dao = new ClienteDAO();
 	    
@@ -26,6 +29,7 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("/crearCliente")
+	@CrossOrigin(origins="*")
 	public boolean crearCliente(String cedula, String direccion, String email,
 			String nombre, String telefono) {
 		
@@ -43,6 +47,7 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("/actualizarCliente")
+	@CrossOrigin(origins="*")
 	public boolean actualizarCliente(String cedula, String direccion, String email,
 			String nombre, String telefono) {
 		
@@ -61,6 +66,7 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("/borrarCliente")
+	@CrossOrigin(origins="*")
 	public boolean borrarCliente(String cedula) {
 		ClienteDAO dao = new ClienteDAO();
 		
