@@ -83,7 +83,7 @@ public class UsuarioDAO {
 		try {
 			PreparedStatement consulta = conexion.getConnection().prepareStatement("SELECT * FROM usuarios WHERE password = ? and usuario = ?");
 			
-			consulta.setString(1,usuario);
+			consulta.setString(1,password);
 			consulta.setString(2,usuario);
 			ResultSet res = consulta.executeQuery();
 			if(res.next()) {
