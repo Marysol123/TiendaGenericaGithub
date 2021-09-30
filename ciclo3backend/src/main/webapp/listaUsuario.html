@@ -57,31 +57,31 @@
     			});
     	});
 
-// $("#btnBorrar").click(function(){
-  //  		let la_cc = $("#cedula").val();
-    //		$.post("http://localhost:8080/borrarCliente", {cedula:la_cc}, function(data, status){
-    //			if (data == true){
-    //				$("#mensaje").html("El cliente fue eliminado");
-    //			}else{
-    //				$("#mensaje").html("<b style = 'color:red;'>No se pudo eliminar, NO existe!</b>");
-    //			}
-    //		});
-    //	});
-    //	$("#btnActualizar").click(function(){
-    //		let la_cc = $("#cedula").val();
-    //		let la_direccion = $("#direccion").val();
-    //		let el_email = $("#email").val();
-    //		let el_nombre = $("#nombre").val();
-    //		let el_telefono = $("#telefono").val();
-    //		$.post("http://localhost:8080//actualizarCliente", {cedula: la_cc, direccion: la_direccion, 
-    //			email:el_email, nombre:el_nombre, telefono:el_telefono}, function(data, status){
-    //				if (data == true){
-    //					$("#mensaje").html("El cliente fue actualizado");
-    //				}else{
-    //					$("#mensaje").html("<b style = 'color:red;'>No se pudo actualizar, NO existe!</b>");
-    //				}
-    //			});
-    //	});  //Esta cierra la etiqueta document
+  		 $("#btnBorrarUs").click(function(){
+    		let la_cc = $("#cedula_usuario").val();
+    		$.post("http://localhost:8080/borrarUsuario", {cedula:la_cc}, function(data, status){
+    			if (data == true){
+    				$("#mensaje").html("El cliente fue eliminado");
+    			}else{
+    				$("#mensaje").html("<b style = 'color:red;'>No se pudo eliminar, NO existe!</b>");
+    			}
+    		});
+    	});
+    	$("#btnActualizarUs").click(function(){
+    		let la_cc = $("#cedula_usuario").val();
+    		let la_email_usuario = $("#email_usuario").val();
+    		let la_nombre_usuario = $("#nombre_usuario").val();
+    		let el_password = $("#password").val();
+    		let el_usuario = $("#usuario").val();
+    		$.post("http://localhost:8080/actualizarUsuario", {cedula_usuario:la_cc, email_usuario:la_email_usuario, 
+    			nombre_usuario:la_nombre_usuario, password:el_password, usuario:el_usuario}, function(data, status){
+    				if (data == true){
+    					$("#mensaje").html("El cliente fue actualizado");
+    				}else{
+    					$("#mensaje").html("<b style = 'color:red;'>No se pudo actualizar, NO existe!</b>");
+    				}
+    			});
+    	});  //Esta cierra la etiqueta document
      }); 
    
 </script>
@@ -94,9 +94,9 @@
     <label>Password</label><input type = "text" id = "password"><br>
     <label>Usuario</label><input type = "text" id = "usuario"><br>
     <button id = "btnListarC">Solicitar Listado</button>
-    <button id = "btnCrear">Crear cliente</button>
-   <button id = "btnBorrar">Borrar cliente</button>
-   <button id = "btnActualizar">Actualizar cliente</button>
+    <button id = "btnCrear">Crear usuario</button>
+    <button id = "btnBorrarUs">Borrar usuario</button>
+    <button id = "btnActualizarUs">Actualizar usuario</button>
     <div id = "listaUsuario"></div>
 </body>
 </html>

@@ -19,10 +19,10 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/traerUsuario")
-	public ArrayList<UsuarioVO> buscarUsuarioCedula(String cedula_usuario){
+	public ArrayList<UsuarioVO> buscarUsuarioCedula(String cedula){
 		UsuarioDAO dao = new UsuarioDAO();
 	    
-	    return dao.buscarUsuarioCedula(cedula_usuario);
+	    return dao.buscarUsuarioCedula(cedula);
 	}
 	
 	@RequestMapping("/crearUsuario")
@@ -51,7 +51,7 @@ public class UsuarioController {
 	
 
 	
-	/*
+
 	@RequestMapping("/actualizarUsuario")
 	public boolean actualizarUsuario(String cedula_Usuario, String email_usuario, String nombre_usuario,
 			String password, String usuario) {
@@ -59,21 +59,22 @@ public class UsuarioController {
 		
 		UsuarioVO Usuario = new UsuarioVO();
 		
-		Usuario.setCedula_Usuario(Long.parseLong(cedula_Usuario));
-		Usuario.setEmail_Usuario(email_usuario);
-		Usuario.setNombre_Usuario(nombre_usuario);
+		Usuario.setCedula_usuario(Long.parseLong(cedula_Usuario));
+		Usuario.setEmail_usuario(email_usuario);
+		Usuario.setNombre_usuario(nombre_usuario);
 		Usuario.setpassword(password);
 		Usuario.setusuario(usuario);
 		
 		UsuarioDAO dao = new UsuarioDAO();
 		
-		return dao.actualizarUsuario(Usuario);	
+		return dao.actualizarusuario(Usuario);	
 	}
+	
 	
 	@RequestMapping("/borrarUsuario")
 	public boolean borrarUsuario(String cedula) {
 		UsuarioDAO dao = new UsuarioDAO();
 		
 		return dao.borrarUsuario(Long.parseLong(cedula));
-	}*/
+	}
 }
