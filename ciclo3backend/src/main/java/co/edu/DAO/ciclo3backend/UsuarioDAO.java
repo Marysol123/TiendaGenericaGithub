@@ -74,6 +74,8 @@ public class UsuarioDAO {
 	 * Busca a un usuario por su cédula
 	 * @param cedula
 	 * @return True si existe el usuario con esa cédula o false de lo contrario
+	 * 
+	 * vero
 	 */
 	public boolean existeusuario(String password, String usuario ) {
 		boolean existe = false;
