@@ -66,9 +66,11 @@ public class UsuarioController {
 		Usuario.setusuario(usuario);
 		
 		UsuarioDAO dao = new UsuarioDAO();
+		// Prueba
 		
 		return dao.actualizarusuario(Usuario);	
 	}
+	// HOLA HOLA
 	
 	
 	@RequestMapping("/borrarUsuario")

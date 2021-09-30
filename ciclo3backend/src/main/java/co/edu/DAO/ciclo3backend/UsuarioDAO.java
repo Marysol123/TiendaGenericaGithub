@@ -155,7 +155,7 @@ public class UsuarioDAO {
 	 * @param usuario
 	 * @return True si se modificó al usuario o false de lo contrario
 	***/
-	
+	// Prueba
 	public boolean actualizarusuario(UsuarioVO usuario) {
 		boolean actualizado = false;
 		
