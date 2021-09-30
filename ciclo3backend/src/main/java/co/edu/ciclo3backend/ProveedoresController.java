@@ -2,53 +2,58 @@ package co.edu.ciclo3backend;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.DAO.ciclo3backend.UsuarioDAO;
-import co.edu.DTO.ciclo3backend.UsuarioVO;
+
+import co.edu.DAO.ciclo3backend.ProveedoresDAO;
+import co.edu.DTO.ciclo3backend.ProveedoresVO;
 
 @RestController
 public class ProveedoresController {
 	
 	@RequestMapping("/listaProveedor")
-	public ArrayList<ProveedorVO> listaDeProveedores){
-		ProveedorDAO dao = new ProveedorDAO();
+	@CrossOrigin(origins="*")
+	public ArrayList<ProveedoresVO> listaDeProveedores(){
+		ProveedoresDAO dao = new ProveedoresDAO();
 	    
-	    return dao.listaDeProveedores();
+	    return dao.listaProveedores();
 	}
 	
 	@RequestMapping("/traerProveedor")
-	public ArrayList<ProveedorVO> buscarProveedorNit(String nitproveedor){
-		ProveedorDAO dao = new ProveedoroDAO();
+	@CrossOrigin(origins="*")
+	public ArrayList<ProveedoresVO> buscarProveedorNit(String nitproveedor){
+		ProveedoresDAO dao = new ProveedoresDAO();
 	    
-	    return dao.buscarProveeddorNit(nitproveedor);
+	    return dao.buscarProveedorNit(nitproveedor);
 	}
 	
-	@RequestMapping("/crearProveedor")
-	public boolean crearProveedor(String nitproveedor, String ciudad_proveedor, String direccion_proveedor, String nombre_proveedor, String telefono_proveedor,
-	//		String password, String usuario)
-			{
+
+	@RequestMapping("/crearCliente")
+	@CrossOrigin(origins="*")
+	public boolean crearProveedor(String nitproveedor, String ciudad_proveedor, String direccion_proveedor, String nombre_proveedor, String telefono_proveedor) {
 		
-		ProveedorVO Proveedor new ProveedorVO();
-						
-		Proveedor.setnitproveedor(Long.parseLong(nitproveedor));
-		Proveedor.setciudad_proveedor (ciudad_proveedor);
-		Proveedor.setdireccion_proveedor (direccion_proveedor);
-		Proveedor.setnombre_proveedor (nombre_proveedor);
-		Proveedor.settelefono_proveedor (telefono_proveedor);
+		ProveedoresVO Proveedor = new ProveedoresVO();
+		
+
+		Proveedor.setNitproveedor(Long.parseLong(nitproveedor));
+		Proveedor.setCiudad_proveedor (ciudad_proveedor);
+		Proveedor.setDireccion_proveedor (direccion_proveedor);
+		Proveedor.setNombre_proveedor (nombre_proveedor);
+		Proveedor.setTelefono_proveedor (telefono_proveedor);
 //		
 		
-		ProveedorDAO dao = new ProveedorDAO();
+		ProveedoresDAO dao = new ProveedoresDAO();
 		
 		return dao.crearProveedor(Proveedor);
 	}
-	
 	@RequestMapping("/loginProveedor")
-	public boolean existeproveedor(String nitproveedor, String nombre_proveedor){
-		ProveedorDAO dao = new ProveedorDAO();
+	
+	public boolean existeproveedor(Long nitproveedor){
+		ProveedoresDAO dao = new ProveedoresDAO();
 	    
-	    return dao.existeproveedor(nitproveedor, nombre_proveedor);
+	    return dao.existeproveedor(nitproveedor);
 	}
 	
 

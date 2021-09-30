@@ -17,14 +17,14 @@ public class ProveedoresDAO {
 			ResultSet res = consulta.executeQuery();
 			while (res.next()) {
 				
-				ProveedoresVO usuario = new ProveedoresVO();
+				ProveedoresVO Proveedor = new ProveedoresVO();
 				
-				Proveedor.setnitproveedor(res.getLong("nitproveedor"));
-				Proveedor.setciudad_proveedor(res.getString ("ciudad_proveedor"));
-				Proveedor.setdireccion_proveedor(res.getString ("direccion_proveedor"));
-				Proveedor.setnombre_proveedor(res.getString ("nombre_proveedor"));
-				Proveedor.settelefono_proveedor(res.getString ("telefono_proveedor"));
-				misproveedores.add(proveedor);
+				Proveedor.setNitproveedor(res.getLong("nitproveedor"));
+				Proveedor.setCiudad_proveedor(res.getString ("ciudad_proveedor"));
+				Proveedor.setDireccion_proveedor(res.getString ("direccion_proveedor"));
+				Proveedor.setNombre_proveedor(res.getString ("nombre_proveedor"));
+				Proveedor.setTelefono_proveedor(res.getString ("telefono_proveedor"));
+				misproveedores.add(Proveedor);
 				
 							
 			}
@@ -41,7 +41,7 @@ public class ProveedoresDAO {
 	 * @param NIT
 	 * @return ArrayList
 	 */
-	public ArrayList<ProveedoresVO> buscarProveedorCedula(String nitproveedor){
+	public ArrayList<ProveedoresVO> buscarProveedorNit(String nitproveedor){
 		 
 		ArrayList<ProveedoresVO> misproveedores = new ArrayList<ProveedoresVO>();
 		Conexion conexion = new Conexion();
@@ -51,14 +51,14 @@ public class ProveedoresDAO {
 			consulta.setLong(1, Long.parseLong(nitproveedor));
 			ResultSet res = consulta.executeQuery();
 			while(res.next()) {
-				ProveedoresVO usuario = new ProveedoresVO();
+				ProveedoresVO Proveedor = new ProveedoresVO();
 				
-				Proveedor.setnitproveedor(res.getLong("nitproveedor"));
-				Proveedor.setciudad_proveedor(res.getString ("ciudad_proveedor"));
-				Proveedor.setdireccion_proveedor(res.getString ("direccion_proveedor"));
-				Proveedor.setnombre_proveedor(res.getString ("nombre_proveedor"));
-				Proveedor.settelefono_proveedor(res.getString ("telefono_proveedor"));
-				misproveedores.add(proveedor);
+				Proveedor.setNitproveedor(res.getLong("nitproveedor"));
+				Proveedor.setCiudad_proveedor(res.getString ("ciudad_proveedor"));
+				Proveedor.setDireccion_proveedor(res.getString ("direccion_proveedor"));
+				Proveedor.setNombre_proveedor(res.getString ("nombre_proveedor"));
+				Proveedor.setTelefono_proveedor(res.getString ("telefono_proveedor"));
+				misproveedores.add(Proveedor);
 								
 			}
 			res.close();
@@ -75,14 +75,14 @@ public class ProveedoresDAO {
 	 * @param NIT
 	 * @return True si existe el proveedor con este NIT asociadp o false si es lo contrario
 	 */
-	public boolean existeproveedor(String nitproveedor, String nombre_proveedo ) {
+	public boolean existeproveedor(Long nitproveedor ) {
 		boolean existe = false;
 		Conexion conexion = new Conexion();
 		try {
-			PreparedStatement consulta = conexion.getConnection().prepareStatement("SELECT * FROM proveedores WHERE nitproveedor = '"+nitproveedor+"' and nombre proveedor = '"+nombre_proveedor+"'");
+			PreparedStatement consulta = conexion.getConnection().prepareStatement("SELECT * FROM proveedores WHERE nitproveedor = ?");
 			
-			consulta.setString(1,proveedor);
-			consulta.setString(2,proveedor);
+			consulta.setLong(1,nitproveedor);
+			
 			ResultSet res = consulta.executeQuery();
 			if(res.next()) {
 				existe = true;
@@ -104,7 +104,7 @@ public class ProveedoresDAO {
 	public boolean crearProveedor(ProveedoresVO proveedores) {
 		boolean creado = false;
 		
-		if(! this.existeusuario(proveedor.getproveedor(), proveedor.getnitproveedor())) {
+		if(! this.existeproveedor(proveedores.getNitproveedor())) {
 			
 			Conexion conexion = new Conexion();
 			try {
@@ -113,9 +113,9 @@ public class ProveedoresDAO {
 				
 				
 				String crearSql = "INSERT INTO proveedores (nitproveedor, ciudad_proveedor, direccion_proveedor, nombre_proveedor, telefono_proveedor) "
-						+ " VALUES ("+proveedor.getnitproveedor()+", '"+proveedor.getciudad_proveedor()+"', "
-								+ "'"+proveedor.getdireccion_proveedor()+"', '"+proveedor.getnombre_proveedor()+"', "
-										+ "'"+proveedor.gettelefono_proveedor()+"')";
+						+ " VALUES ("+proveedores.getNitproveedor()+", '"+proveedores.getCiudad_proveedor()+"', "
+								+ "'"+proveedores.getDireccion_proveedor()+"', '"+proveedores.getNombre_proveedor()+"', "
+										+ "'"+proveedores.getTelefono_proveedor()+"')";
 				consulta.executeUpdate(crearSql);
 				consulta.close();
 				conexion.desconectar();
