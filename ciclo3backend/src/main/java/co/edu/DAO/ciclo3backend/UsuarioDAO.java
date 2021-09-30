@@ -81,7 +81,7 @@ public class UsuarioDAO {
 		boolean existe = false;
 		Conexion conexion = new Conexion();
 		try {
-			PreparedStatement consulta = conexion.getConnection().prepareStatement("SELECT * FROM usuarios WHERE password = '"+password+"' and usuario = '"+usuario+"'");
+			PreparedStatement consulta = conexion.getConnection().prepareStatement("SELECT * FROM usuarios WHERE password = ? and usuario = ?");
 			
 			consulta.setString(1,usuario);
 			consulta.setString(2,usuario);
