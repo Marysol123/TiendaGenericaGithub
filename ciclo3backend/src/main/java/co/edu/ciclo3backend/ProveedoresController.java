@@ -30,7 +30,7 @@ public class ProveedoresController {
 	}
 	
 
-	@RequestMapping("/crearCliente")
+	@RequestMapping("/crearProveedor")
 	@CrossOrigin(origins="*")
 	public boolean crearProveedor(String nitproveedor, String ciudad_proveedor, String direccion_proveedor, String nombre_proveedor, String telefono_proveedor) {
 		
@@ -48,13 +48,7 @@ public class ProveedoresController {
 		
 		return dao.crearProveedor(Proveedor);
 	}
-	@RequestMapping("/loginProveedor")
-	
-	public boolean existeproveedor(Long nitproveedor){
-		ProveedoresDAO dao = new ProveedoresDAO();
-	    
-	    return dao.existeproveedor(nitproveedor);
-	}
+
 	
 
 	
