@@ -2,6 +2,7 @@ package co.edu.ciclo3backend;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +13,7 @@ import co.edu.DTO.ciclo3backend.UsuarioVO;
 public class UsuarioController {
 	
 	@RequestMapping("/listaUsuario")
+	@CrossOrigin(origins="*")
 	public ArrayList<UsuarioVO> listaDeusuario(){
 		UsuarioDAO dao = new UsuarioDAO();
 	    
@@ -19,6 +21,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/traerUsuario")
+	@CrossOrigin(origins="*")
 	public ArrayList<UsuarioVO> buscarUsuarioCedula(String cedula_usuario){
 		UsuarioDAO dao = new UsuarioDAO();
 	    
@@ -26,6 +29,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/crearUsuario")
+	@CrossOrigin(origins="*")
 	public boolean crearUsuario(String cedula_usuario, String email_usuario, String nombre_usuario,
 			String password, String usuario) {
 		
@@ -43,9 +47,9 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/loginUsuario")
+	@CrossOrigin(origins="*")
 	public boolean existeusuario(String password, String usuario){
 		UsuarioDAO dao = new UsuarioDAO();
-	    
 	    return dao.existeusuario(password, usuario);
 	}
 	
