@@ -42,38 +42,35 @@ public class ProveedoresController {
 		Proveedor.setDireccion_proveedor (direccion_proveedor);
 		Proveedor.setNombre_proveedor (nombre_proveedor);
 		Proveedor.setTelefono_proveedor (telefono_proveedor);
-//		
+		
 		
 		ProveedoresDAO dao = new ProveedoresDAO();
 		
 		return dao.crearProveedor(Proveedor);
 	}
 
-	
-
-	
-	/*
 	@RequestMapping("/actualizarProveedor")
 	public boolean actualizarUsuario(String nitproveedor, String ciudad_proveedor, String direccion_proveedor, String nombre_proveedor, String telefono_proveedor) {
 		
 		
-		ProveedorVO Proveedor = new ProveedorVO();
+		ProveedoresVO Proveedor = new ProveedoresVO();
 		
-		Proveedor.setnitproveedor(Long.parseLong(nitproveedor));
-		Proveedor.setciudad_proveedor (ciudad_proveedor);
-		Proveedor.setdireccion_proveedor (direccion_proveedor);
-		Proveedor.setnombre_proveedor (nombre_proveedor);
-		Proveedor.settelefono_proveedor (telefono_proveedor);
 		
-		ProveedorDAO dao = new ProveedorDAO();
+		Proveedor.setNitproveedor(Long.parseLong(nitproveedor));
+		Proveedor.setCiudad_proveedor (ciudad_proveedor);
+		Proveedor.setDireccion_proveedor (direccion_proveedor);
+		Proveedor.setNombre_proveedor (nombre_proveedor);
+		Proveedor.setTelefono_proveedor (telefono_proveedor);
 		
-		return dao.actualizarProveeedor(Proveedor);	
+		ProveedoresDAO dao = new ProveedoresDAO();
+		
+		return dao.actualizarproveedor(Proveedor);	
 	}
 	
 	@RequestMapping("/borrarProveedor")
 	public boolean borrarProveedor(String nitproveedor) {
-		ProveedorDAO dao = new ProveedorDAO();
+		ProveedoresDAO dao = new ProveedoresDAO();
 		
-		return dao.borrarProveedor(Long.parseLong(nitproveedor));
-	}*/
+		return dao.borrarproveedor(Long.parseLong(nitproveedor));
+	}
 }

@@ -134,17 +134,18 @@ public class ProveedoresDAO {
 	 * Actualizar los datos de un proveedor
 	 * @param proveedor
 	 * @return True si se modificó el proveedor o false de lo contrario
+	 * */
 	
-	public boolean actualizarproveedor(proveedorVO proveedor) {
+	public boolean actualizarproveedor(ProveedoresVO proveedor) {
 		boolean actualizado = false;
 		
-		if( this.existeproveedor(proveedor.getnitproveedor())) {
+		if( this.existeproveedor(proveedor.getNitproveedor())) {
 			Conexion conexion = new Conexion();
 			try {
 				Statement consulta = conexion.getConnection().createStatement();
-				String actualizarSql = "UPDATE proveedores SET ciudad_proveedor ='"+proveedor.getciudad_proveedor()+"', "
-					+ " direccion_proveedor = '"+proveedor.getdireccion_proveedor()+"', nombre_proveedor = '"+proveedor.getnormbre_proveedor()+"', "
-					    + " telefono_proveedor = '"+proveedor.getTelefono_proveedor()+"' WHERE nitproveedor = "+proveedor.getnitproveedor()+"";
+				String actualizarSql = "UPDATE proveedores SET ciudad_proveedor ='"+proveedor.getCiudad_proveedor()+"', "
+					+ " direccion_proveedor = '"+proveedor.getDireccion_proveedor()+"', nombre_proveedor = '"+proveedor.getNombre_proveedor()+"', "
+					    + " telefono_proveedor = '"+proveedor.getTelefono_proveedor()+"' WHERE nitproveedor = "+proveedor.getNitproveedor()+"";
 				consulta.executeUpdate(actualizarSql);
 				
 				consulta.close();
@@ -162,7 +163,7 @@ public class ProveedoresDAO {
 	public boolean borrarproveedor(Long nitproveedor) {
 		boolean eliminado = false;
 		
-		if( this.existeusuario(nitproveedor)) {
+		if( this.existeproveedor(nitproveedor)) {
 			Conexion conexion = new Conexion();
 			try {
 				Statement consulta = conexion.getConnection().createStatement();
@@ -181,7 +182,7 @@ public class ProveedoresDAO {
 		
 		return eliminado;
 	}
-	 */
+	 
 
 }
 
