@@ -79,12 +79,24 @@
     					$("#mensaje").html("El cliente fue actualizado");
     				}else{
     					$("#mensaje").html("<b style = 'color:red;'>No se pudo actualizar, NO existe!</b>");
-    					// Prueba Prueba Prueba
+    					
     				}
     			});
-    	});  //Esta cierra la etiqueta document
-     }); 
-    // HOLA HOLA HOLA
+    	});  
+    	$("#btnLogin").click(function(){
+    		let el_password = $("#password").val();
+    		let el_usuario = $("#usuario").val();
+    		$.post("http://localhost:8080//loginUsuario", {password:el_password, usuario:el_usuario}, function(data, status){
+    			if (data == true){
+    				$("#mensaje").html("Usuario válido!!");
+    			}else{
+    				$("#mensaje").html("Usuario o contraseña no válidos");
+    			}
+    		});
+    	});
+     
+    }); 
+    
    
 </script>
 </head>
@@ -99,6 +111,7 @@
     <button id = "btnCrear">Crear usuario</button>
     <button id = "btnBorrarUs">Borrar usuario</button>
     <button id = "btnActualizarUs">Actualizar usuario</button>
+    <button id = "btnLogin">Login </button>
     <div id = "listaUsuario"></div>
 </body>
 </html>

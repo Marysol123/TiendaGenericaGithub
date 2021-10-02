@@ -43,7 +43,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/loginUsuario")
-	public boolean existeusuario(String password, String usuario){
+	public boolean loginUsuario(String password, String usuario){
 		UsuarioDAO dao = new UsuarioDAO();
 	    
 	    return dao.existeusuario(password, usuario);
@@ -53,24 +53,24 @@ public class UsuarioController {
 	
 
 	@RequestMapping("/actualizarUsuario")
-	public boolean actualizarUsuario(String cedula_Usuario, String email_usuario, String nombre_usuario,
+	public boolean actualizarUsuario(String cedula_usuario, String email_usuario, String nombre_usuario,
 			String password, String usuario) {
 		
 		
 		UsuarioVO Usuario = new UsuarioVO();
 		
-		Usuario.setCedula_usuario(Long.parseLong(cedula_Usuario));
+		Usuario.setCedula_usuario(Long.parseLong(cedula_usuario));
 		Usuario.setEmail_usuario(email_usuario);
 		Usuario.setNombre_usuario(nombre_usuario);
 		Usuario.setpassword(password);
 		Usuario.setusuario(usuario);
 		
 		UsuarioDAO dao = new UsuarioDAO();
-		// Prueba
+		
 		
 		return dao.actualizarusuario(Usuario);	
 	}
-	// HOLA HOLA
+	
 	
 	
 	@RequestMapping("/borrarUsuario")

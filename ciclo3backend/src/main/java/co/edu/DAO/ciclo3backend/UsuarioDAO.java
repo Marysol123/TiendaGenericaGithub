@@ -76,13 +76,13 @@ public class UsuarioDAO {
 	 * @param cedula
 	 * @return True si existe el usuario con esa cédula o false de lo contrario
 	 */
-	public boolean existeusuario(String password, String usuario ) {
+	public boolean existeusuario(String password, String usuario) {
 		boolean existe = false;
 		Conexion conexion = new Conexion();
 		try {
-			PreparedStatement consulta = conexion.getConnection().prepareStatement("SELECT * FROM usuarios WHERE password = '"+password+"' and usuario = '"+usuario+"'");
+			PreparedStatement consulta = conexion.getConnection().prepareStatement("SELECT * FROM usuarios WHERE password = ? AND usuario = ? ");
 			
-			consulta.setString(1,usuario);
+			consulta.setString(1,password);
 			consulta.setString(2,usuario);
 			ResultSet res = consulta.executeQuery();
 			if(res.next()) {
@@ -164,8 +164,9 @@ public class UsuarioDAO {
 			try {
 				Statement consulta = conexion.getConnection().createStatement();
 				String actualizarSql = "UPDATE usuarios SET email_usuario ='"+usuario.getEmail_usuario()+"', "
-					+ " nombre_usuario = '"+usuario.getNombre_usuario()+"', usuario = '"+usuario.getusuario()+"' "
-					    + " password_usuario = '"+usuario.getpassword()+"' WHERE cedula_usuario = "+usuario.getCedula_usuario()+" ";
+					+ " nombre_usuario = '"+usuario.getNombre_usuario()+"', password = '"+usuario.getpassword()+"', "
+					    + " usuario = '"+usuario.getusuario()+"' WHERE cedula_usuario = "+usuario.getCedula_usuario()+" ";
+			
 				consulta.executeUpdate(actualizarSql);
 				
 				consulta.close();
