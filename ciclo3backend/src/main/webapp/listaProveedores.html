@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Proveedores</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    	$("#btnListarP").click(function(){
+        	$.get("http://localhost:8080/listaProveedor", function(data, status){
+        		if (status == "success"){
+        			let longitud = data.length;
+        			let salidaDatos = "<table border ='1'>";
+        			salidaDatos = salidaDatos + "<tr><th>NIT</th><th>DIRECCIÓN</th><th>CIUDAD</th><th>NOMBRE</th><th>TELEFONO</th></tr>";
+        			for(let i = 0; i < longitud; i++){
+        				salidaDatos = salidaDatos + "<tr>";
+        				salidaDatos = salidaDatos + "<td>"  + data[i].nitproveedor + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].direccion_proveedor + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].ciudad_proveedor + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].nombre_proveedor + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].telefono_proveedor + "</td>";
+        				salidaDatos = salidaDatos + "</tr>";
+        			}
+        			salidaDatos = salidaDatos + "</table>";
+        			$("#listaProveedores").html(salidaDatos);
+        		}
+        	});	
+    	});	    	
+    	$("#btnBuscarNIT").click(function(){
+    		let la_nit = $("#nit").val();   // El .val asigna el valor de la variable cedula a cc
+    		$.post("http://localhost:8080/traerProveedor", {nitproveedor: la_nit}, function(data, status){
+    			let longitud = data.length;
+    			if (longitud > 0){
+    				$("#direccion").val(data[0].direccion_proveedor);
+    				$("#ciudad").val(data[0].ciudad_proveedor);
+    				$("#nombre").val(data[0].nombre_proveedor);
+    				$("#telefono").val(data[0].telefono_proveedor);
+    			}else{
+    				$("#mensaje").html("Proveedor no encontrado.");
+    			}
+    		});
+    	});
+    	$("#btnCrear").click(function(){
+    		let la_nit = $("#nit").val();
+    		let la_direccion = $("#direccion").val();
+    		let el_ciudad = $("#ciudad").val();
+    		let el_nombre = $("#nombre").val();
+    		let el_telefono = $("#telefono").val();
+    		$.post("http://localhost:8080/crearProveedor", {nitproveedor: la_nit, ciudad_proveedor: el_ciudad, 
+    			direccion_proveedor:la_direccion, nombre_proveedor:el_nombre, telefono_proveedor:el_telefono}, function(data,status){
+    				if (data == true){
+    					$("#mensaje").html("El proveedor fue creado");
+    				}else{
+    					$("#mensaje").html("<b style = 'color:red;'>No se pudo crear, ya existe!</b>");
+    				}
+    				
+    			});
+    	});
+    	$("#btnBorrar").click(function(){
+    		let la_nit = $("#nit").val();
+    		$.post("http://localhost:8080/borrarProveedor", {nitproveedor: la_nit}, function(data, status){
+    			if (data == true){
+    				$("#mensaje").html("El proveedor fue eliminado");
+    			}else{
+    				$("#mensaje").html("<b style = 'color:red;'>No se pudo eliminar, NO existe!</b>");
+    			}
+    		});
+    	});
+    	$("#btnActualizar").click(function(){
+    		let la_nit = $("#nit").val();
+    		let la_direccion = $("#direccion").val();
+    		let el_ciudad = $("#ciudad").val();
+    		let el_nombre = $("#nombre").val();
+    		let el_telefono = $("#telefono").val();
+    		$.post("http://localhost:8080//actualizarProveedor", {nitproveedor: la_nit, ciudad_proveedor: el_ciudad, 
+    			direccion_proveedor:la_direccion, nombre_proveedor:el_nombre, telefono_proveedor:el_telefono}, function(data, status){
+    				if (data == true){
+    					$("#mensaje").html("El proveedor fue actualizado");
+    				}else{
+    					$("#mensaje").html("<b style = 'color:red;'>No se pudo actualizar, NO existe!</b>");
+    				}
+    			});
+    	});
+    });  //Esta cierra la etiqueta document
+</script>
+</head>
+<body>
+    <label>NIT a buscar</label><input type = "text" id ="nit"><button id = "btnBuscarNIT">buscar</button><br>
+    <p id = "mensaje"></p>
+    <label>Dirección</label><input type = "text" id = "direccion"><br>
+    <label>Ciudad</label><input type = "text" id = "ciudad"><br>
+    <label>Nombre</label><input type = "text" id = "nombre"><br>
+    <label>Teléfono</label><input type = "text" id = "telefono"><br>
+    <button id = "btnListarP">Solicitar Listado</button>
+    <button id = "btnCrear">Crear proveedor</button>
+    <button id = "btnBorrar">Borrar proveedor</button>
+    <button id = "btnActualizar">Actualizar proveedor</button>
+    <div id = "listaProveedores"></div>
+</body>
+</html>
