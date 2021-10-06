@@ -1,34 +1,33 @@
 $(document).ready(function () {
 
     /**
-     * Metodo Buscar por documento
+     * Buscar Usuario por documento
      */
     $("#btnBuscarCC").click(function () {
         let la_cc = $("#cedula").val();   // El .val asigna el valor de la variable cedula a cc
         $.post(urlBackend + "traerUsuario", {cedula_usuario: la_cc}, function (data, status) {
             let longitud = data.length;
             if (longitud > 0) {
-                $("#password").val(data[0].password);
                 $("#email").val(data[0].email_usuario);
                 $("#nombre").val(data[0].nombre_usuario);
+                $("#password").val(data[0].password);
                 $("#usuario").val(data[0].usuario);
             } else {
-                swal("OOOPSSS", "EL USUARIO NO SE ENCONTRO", "error");
+                swal("OOOPSSS", "USUARIO NO ENCONTRADO", "error");
                 limpiarFormulario();
             }
         });
     });
 
-
     /**
-     * Metodo para limpiar el formulario
+     * Limpiar el formulario
      */
     function limpiarFormulario() {
         $('input[type="text"]').val('');
     }
 
     /**
-     * Metodo parea validar si el campo esta vacio
+     * Verificar Campos vacios
      * @param campo
      * @returns {boolean}
      */
@@ -37,64 +36,95 @@ $(document).ready(function () {
         if (tmp.length == 0) {
             swal("OOOPSSS", "no estan diligenciados todos los campos", "error")
                 .then((value) => {
-                    $('input[type="text"]').val('');
+                    limpiarFormulario();
                 });
             return false;
         }
         return true;
     }
 
-
     /**
-     * Metodo para crear un usuario
+     * Crear Usuario
      */
     $("#btnCrear").click(function () {
         let la_cc = $("#cedula").val();
-        if (!notificarVacio(la_cc)) return;
-        let usuario = $("#usuario").val();
-        if (!notificarVacio(usuario)) return;
-        let nombre = $("#nombre").val();
-        if (!notificarVacio(nombre)) return;
+        if(!notificarVacio(la_cc)) return;
         let email = $("#email").val();
-        if (!notificarVacio(email)) return;
-        let el_telefono = $("#telefono").val();
-        $.post(urlBackend + "crearCliente", {
-            cedula: la_cc, direccion: la_direccion,
-            email: el_email, nombre: el_nombre, telefono: el_telefono
+        if(!notificarVacio(email)) return;
+        let nombre_usuario = $("#nombre").val();
+        if(!notificarVacio(nombre_usuario)) return;
+        let usuario = $("#usuario").val();
+        if(!notificarVacio(usuario)) return;
+        let password = $("#password").val();
+        if(!notificarVacio(password)) return;
+
+        $.post(urlBackend + "crearUsuario", {
+            cedula_usuario: la_cc,  email_usuario: email,
+            nombre_usuario:nombre_usuario, usuario: usuario,
+            password: password
         }, function (data, status) {
             if (data == true) {
-                $("#mensaje").html("El cliente fue creado");
+                swal("USUARIO CREADO!!", "USUARIO CREADO CON EXITO", "success");
+                limpiarFormulario();
             } else {
-                $("#mensaje").html("<b style = 'color:red;'>No se pudo crear, ya existe!</b>");
+                swal("OOOPSSS", "NO SE PUDO CREAR EL USUARIO", "error");
+                limpiarFormulario();
             }
 
         });
     });
 
+
+    /**
+     * BORRAR USUARIO
+     */
     $("#btnBorrar").click(function () {
         let la_cc = $("#cedula").val();
-        $.post(urlBackend + "borrarCliente", {cedula: la_cc}, function (data, status) {
+        if(!notificarVacio(la_cc)) return;
+        let email = $("#email").val();
+        if(!notificarVacio(email)) return;
+        let nombre_usuario = $("#nombre").val();
+        if(!notificarVacio(nombre_usuario)) return;
+        let usuario = $("#usuario").val();
+        if(!notificarVacio(usuario)) return;
+        let password = $("#password").val();
+        if(!notificarVacio(password)) return;
+        $.post(urlBackend + "borrarUsuario", {cedula: la_cc}, function (data, status) {
             if (data == true) {
-                $("#mensaje").html("El cliente fue eliminado");
+                swal("USUARIO ELIMINADO!!", "USUARIO ELIMINADO CON EXITO", "success");
+                limpiarFormulario();
             } else {
-                $("#mensaje").html("<b style = 'color:red;'>No se pudo eliminar, NO existe!</b>");
+                swal("OOOPSSS", "NO SE PUDO ELIMINAR EL USUARIO", "error");
+                limpiarFormulario();
             }
         });
     });
+
+    /**
+     * ACTUALIZAR UN USUARIO
+     */
     $("#btnActualizar").click(function () {
         let la_cc = $("#cedula").val();
-        let la_direccion = $("#direccion").val();
-        let el_email = $("#email").val();
-        let el_nombre = $("#nombre").val();
-        let el_telefono = $("#telefono").val();
-        $.post(urlBackend + "actualizarCliente", {
-            cedula: la_cc, direccion: la_direccion,
-            email: el_email, nombre: el_nombre, telefono: el_telefono
+        if(!notificarVacio(la_cc)) return;
+        let email = $("#email").val();
+        if(!notificarVacio(email)) return;
+        let nombre_usuario = $("#nombre").val();
+        if(!notificarVacio(nombre_usuario)) return;
+        let usuario = $("#usuario").val();
+        if(!notificarVacio(usuario)) return;
+        let password = $("#password").val();
+        if(!notificarVacio(password)) return;
+        $.post(urlBackend + "actualizarUsuario", {
+            cedula_usuario: la_cc,  email_usuario: email,
+            nombre_usuario:nombre_usuario, usuario: usuario,
+            password: password
         }, function (data, status) {
             if (data == true) {
-                $("#mensaje").html("El cliente fue actualizado");
+                swal("USUARIO ACTUALIZADO!!", "USUARIO ACTUALIZADO CON EXITO", "success");
+                limpiarFormulario();
             } else {
-                $("#mensaje").html("<b style = 'color:red;'>No se pudo actualizar, NO existe!</b>");
+                swal("OOOPSSS", "NO SE PUDO ACTUALIZAR EL USUARIO", "error");
+                limpiarFormulario();
             }
         });
     });
