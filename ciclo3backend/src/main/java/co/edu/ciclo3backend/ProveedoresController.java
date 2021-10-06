@@ -50,6 +50,7 @@ public class ProveedoresController {
 	}
 
 	@RequestMapping("/actualizarProveedor")
+	@CrossOrigin(origins="*")
 	public boolean actualizarUsuario(String nitproveedor, String ciudad_proveedor, String direccion_proveedor, String nombre_proveedor, String telefono_proveedor) {
 		
 		
@@ -68,6 +69,7 @@ public class ProveedoresController {
 	}
 	
 	@RequestMapping("/borrarProveedor")
+	@CrossOrigin(origins="*")
 	public boolean borrarProveedor(String nitproveedor) {
 		ProveedoresDAO dao = new ProveedoresDAO();
 		

@@ -8,12 +8,12 @@ $(document).ready(function () {
         $.post(urlBackend + "traerProveedor", {nitproveedor: la_nit}, function (data, status) {
             let longitud = data.length;
             if (longitud > 0) {
-                $("#direccion").val(data[0].direccion_cliente);
-                $("#email").val(data[0].email_cliente);
-                $("#nombre").val(data[0].nombre_cliente);
-                $("#telefono").val(data[0].telefono_cliente);
+                $("#direccion").val(data[0].direccion_proveedor);
+                $("#ciudad").val(data[0].ciudad_proveedor);
+                $("#nombre").val(data[0].nombre_proveedor);
+                $("#telefono").val(data[0].telefono_proveedor);
             } else {
-                swal("OOOPSSS", "CLIENTE NO ENCONTRADO", "error");
+                swal("OOOPSSS", "PROVEEDOR NO ENCONTRADO", "error");
                 limpiarFormulario();
             }
         });
@@ -44,28 +44,31 @@ $(document).ready(function () {
     }
 
     /**
-     * Crear Cliente
+     * Crear Proveedor
      */
     $("#btnCrear").click(function () {
-        let la_cc = $("#cedula").val();
-        if(!notificarVacio(la_cc)) return;
-        let la_direccion = $("#direccion").val();
-        if(!notificarVacio(la_direccion)) return;
-        let el_email = $("#email").val();
-        if(!notificarVacio(el_email)) return;
-        let el_nombre = $("#nombre").val();
-        if(!notificarVacio(el_nombre)) return;
-        let el_telefono = $("#telefono").val();
-        if(!notificarVacio(el_telefono)) return;
-        $.post(urlBackend + "crearCliente", {
-            cedula: la_cc, direccion: la_direccion,
-            email: el_email, nombre: el_nombre, telefono: el_telefono
+        let nit = $("#nit").val();
+        if(!notificarVacio(nit)) return;
+        let telefono = $("#telefono").val();
+        if(!notificarVacio(telefono)) return;
+        let nombre = $("#nombre").val();
+        if(!notificarVacio(nombre)) return;
+        let ciudad = $("#ciudad").val();
+        if(!notificarVacio(ciudad)) return;
+        let direccion = $("#direccion").val();
+        if(!notificarVacio(direccion)) return;
+        $.post(urlBackend + "crearProveedor", {
+            nitproveedor: nit,
+            ciudad_proveedor: ciudad,
+            direccion_proveedor:direccion,
+            nombre_proveedor:nombre,
+            telefono_proveedor:telefono
         }, function (data, status) {
             if (data == true) {
-                swal("CLIENTE CREADO!!", "CLIENTE CREADO CON EXITO", "success");
+                swal("PROVEEDOR CREADO!!", "PROVEEDOR CREADO CON EXITO", "success");
                 limpiarFormulario();
             } else {
-                swal("OOOPSSS", "NO SE PUDO CREAR EL CLIENTE", "error");
+                swal("OOOPSSS", "NO SE PUDO CREAR EL PROVEEDOR", "error");
                 limpiarFormulario();
             }
 
@@ -74,53 +77,56 @@ $(document).ready(function () {
 
 
     /**
-     * BORRAR CLIENTE
+     * BORRAR PROVEEDOR
      */
     $("#btnBorrar").click(function () {
-        let la_cc = $("#cedula").val();
-        if(!notificarVacio(la_cc)) return;
-        let la_direccion = $("#direccion").val();
-        if(!notificarVacio(la_direccion)) return;
-        let el_email = $("#email").val();
-        if(!notificarVacio(el_email)) return;
-        let el_nombre = $("#nombre").val();
-        if(!notificarVacio(el_nombre)) return;
-        let el_telefono = $("#telefono").val();
-        if(!notificarVacio(el_telefono)) return;
-        $.post(urlBackend + "borrarCliente", {cedula: la_cc}, function (data, status) {
+        let nit = $("#nit").val();
+        if(!notificarVacio(nit)) return;
+        let telefono = $("#telefono").val();
+        if(!notificarVacio(telefono)) return;
+        let nombre = $("#nombre").val();
+        if(!notificarVacio(nombre)) return;
+        let ciudad = $("#ciudad").val();
+        if(!notificarVacio(ciudad)) return;
+        let direccion = $("#direccion").val();
+        if(!notificarVacio(direccion)) return;
+        $.post(urlBackend + "borrarProveedor", {nitproveedor: nit}, function (data, status) {
             if (data == true) {
-                swal("CLIENTE ELIMINADO!!", "CLIENTE ELIMINADO CON EXITO", "success");
+                swal("PROVEEDOR ELIMINADO!!", "PROVEEDOR ELIMINADO CON EXITO", "success");
                 limpiarFormulario();
             } else {
-                swal("OOOPSSS", "NO SE PUDO ELIMINAR EL CLIENTE", "error");
+                swal("OOOPSSS", "NO SE PUDO ELIMINAR EL PROVEEDOR", "error");
                 limpiarFormulario();
             }
         });
     });
 
     /**
-     * ACTUALIZAR UN CLIENTE
+     * ACTUALIZAR UN PROVEEDOR
      */
     $("#btnActualizar").click(function () {
-        let la_cc = $("#cedula").val();
-        if(!notificarVacio(la_cc)) return;
-        let la_direccion = $("#direccion").val();
-        if(!notificarVacio(la_direccion)) return;
-        let el_email = $("#email").val();
-        if(!notificarVacio(el_email)) return;
-        let el_nombre = $("#nombre").val();
-        if(!notificarVacio(el_nombre)) return;
-        let el_telefono = $("#telefono").val();
-        if(!notificarVacio(el_telefono)) return;
-        $.post(urlBackend + "actualizarCliente", {
-            cedula: la_cc, direccion: la_direccion,
-            email: el_email, nombre: el_nombre, telefono: el_telefono
+        let nit = $("#nit").val();
+        if(!notificarVacio(nit)) return;
+        let telefono = $("#telefono").val();
+        if(!notificarVacio(telefono)) return;
+        let nombre = $("#nombre").val();
+        if(!notificarVacio(nombre)) return;
+        let ciudad = $("#ciudad").val();
+        if(!notificarVacio(ciudad)) return;
+        let direccion = $("#direccion").val();
+        if(!notificarVacio(direccion)) return;
+        $.post(urlBackend + "actualizarProveedor", {
+            nitproveedor: nit,
+            ciudad_proveedor: ciudad,
+            direccion_proveedor:direccion,
+            nombre_proveedor:nombre,
+            telefono_proveedor:telefono
         }, function (data, status) {
             if (data == true) {
-                swal("CLIENTE ACTUALIZADO!!", "CLIENTE ACTUALIZADO CON EXITO", "success");
+                swal("PROVEEDOR ACTUALIZADO!!", "PROVEEDOR ACTUALIZADO CON EXITO", "success");
                 limpiarFormulario();
             } else {
-                swal("OOOPSSS", "NO SE PUDO ACTUALIZAR EL CLIENTE", "error");
+                swal("OOOPSSS", "NO SE PUDO ACTUALIZAR EL PROVEEDOR", "error");
                 limpiarFormulario();
             }
         });
