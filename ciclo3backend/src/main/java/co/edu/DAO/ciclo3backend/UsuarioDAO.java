@@ -77,6 +77,28 @@ public class UsuarioDAO {
 	 * 
 	 * vero
 	 */
+	
+	public boolean existeusuario(Long cedula) {
+		boolean existe = false;
+		Conexion conexion = new Conexion();
+		try {
+			PreparedStatement consulta = conexion.getConnection().prepareStatement("SELECT * FROM usuarios WHERE cedula_usuario = ?");
+			
+			consulta.setLong(1,cedula);
+			
+			ResultSet res = consulta.executeQuery();
+			if(res.next()) {
+				existe = true;
+			}
+			res.close();
+			consulta.close();
+			conexion.desconectar();
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return existe;
+	}
+	
 	public boolean existeusuario(String password, String usuario ) {
 		boolean existe = false;
 		Conexion conexion = new Conexion();
@@ -132,21 +154,20 @@ public class UsuarioDAO {
 		return creado;
 	}
 	
-	/***
-	 * Actualiza los datos de un usuario
-	 * @param usuario
-	 * @return True si se modificó al usuario o false de lo contrario
 	
-	public boolean actualizarusuario(usuarioVO usuario) {
+	 
+	
+	public boolean actualizarUsuario(UsuarioVO usuario) {
+		
 		boolean actualizado = false;
 		
-		if( this.existeusuario(usuario.getCedula_usuario())) {
+		if( this.existeusuario(usuario.getCedula_usuario())) {	
 			Conexion conexion = new Conexion();
 			try {
 				Statement consulta = conexion.getConnection().createStatement();
-				String actualizarSql = "UPDATE usuarios SET direccion_usuario ='"+usuario.getDireccion_usuario()+"', "
-					+ " email_usuario = '"+usuario.getEmail_usuario()+"', nombre_usuario = '"+usuario.getNombre_usuario()+"', "
-					    + " telefono_usuario = '"+usuario.getTelefono_usuario()+"' WHERE cedula_usuario = "+usuario.getCedula_usuario()+"";
+				String actualizarSql = "UPDATE usuarios SET email_usuario = '"+usuario.getEmail_usuario()+"', "
+						+ " nombre_usuario = '"+usuario.getNombre_usuario()+"', password = '"+usuario.getpassword()+"', "
+						+ " usuario = '"+usuario.getusuario()+"' WHERE cedula_usuario = "+usuario.getCedula_usuario()+" ";	  
 				consulta.executeUpdate(actualizarSql);
 				
 				consulta.close();
@@ -160,6 +181,7 @@ public class UsuarioDAO {
 		}
 		return actualizado;
 	}
+	
 	
 	public boolean borrarusuario(Long cedula) {
 		boolean eliminado = false;
@@ -183,6 +205,6 @@ public class UsuarioDAO {
 		
 		return eliminado;
 	}
-	 */
+	 
 
 }

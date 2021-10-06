@@ -28,7 +28,7 @@
     	});	    	
     	$("#btnBuscarCC").click(function(){
     		let la_cc = $("#cedula_usuario").val();   // El .val asigna el valor de la variable cedula a cc
-    		$.post("http://localhost:8080/traerUsuario", {cedula: la_cc}, function(data, status){
+    		$.post("http://localhost:8080/traerUsuario", {cedula_usuario: la_cc}, function(data, status){
     			let longitud = data.length;
     			if (longitud > 0){
     				$("#email_usuario").val(data[0].email_usuario);
@@ -36,7 +36,7 @@
     				$("#password").val(data[0].password);
     				$("#usuario").val(data[0].usuario);
     			}else{
-    				$("#mensaje").html("Cliente no encontrado.");
+    				$("#mensaje").html("Usuario no encontrado.");
     			}
     		});
     	});
@@ -49,7 +49,7 @@
     		$.post("http://localhost:8080/crearUsuario", {cedula_usuario:la_cc, email_usuario:la_email_usuario, 
     			nombre_usuario:la_nombre_usuario, password:el_password, usuario:el_usuario}, function(data,status){
     				if (data == true){
-    					$("#mensaje").html("El cliente fue creado");
+    					$("#mensaje").html("El usuario fue creado");
     				}else{
     					$("#mensaje").html("<b style = 'color:red;'>No se pudo crear, ya existe!</b>");
     				}
@@ -61,7 +61,7 @@
     		let la_cc = $("#cedula_usuario").val();
     		$.post("http://localhost:8080/borrarUsuario", {cedula:la_cc}, function(data, status){
     			if (data == true){
-    				$("#mensaje").html("El cliente fue eliminado");
+    				$("#mensaje").html("El usuario fue eliminado");
     			}else{
     				$("#mensaje").html("<b style = 'color:red;'>No se pudo eliminar, NO existe!</b>");
     			}
@@ -76,7 +76,7 @@
     		$.post("http://localhost:8080/actualizarUsuario", {cedula_usuario:la_cc, email_usuario:la_email_usuario, 
     			nombre_usuario:la_nombre_usuario, password:el_password, usuario:el_usuario}, function(data, status){
     				if (data == true){
-    					$("#mensaje").html("El cliente fue actualizado");
+    					$("#mensaje").html("El usuario fue actualizado");
     				}else{
     					$("#mensaje").html("<b style = 'color:red;'>No se pudo actualizar, NO existe!</b>");
     					

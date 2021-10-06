@@ -55,17 +55,18 @@ public class UsuarioController {
 	
 
 	
-	/*
+	
 	@RequestMapping("/actualizarUsuario")
-	public boolean actualizarUsuario(String cedula_Usuario, String email_usuario, String nombre_usuario,
+	@CrossOrigin(origins="*")
+	public boolean actualizarUsuario(String cedula_usuario, String email_usuario, String nombre_usuario,
 			String password, String usuario) {
 		
 		
 		UsuarioVO Usuario = new UsuarioVO();
 		
-		Usuario.setCedula_Usuario(Long.parseLong(cedula_Usuario));
-		Usuario.setEmail_Usuario(email_usuario);
-		Usuario.setNombre_Usuario(nombre_usuario);
+		Usuario.setCedula_usuario(Long.parseLong(cedula_usuario));
+		Usuario.setEmail_usuario(email_usuario);
+		Usuario.setNombre_usuario(nombre_usuario);
 		Usuario.setpassword(password);
 		Usuario.setusuario(usuario);
 		
@@ -74,10 +75,13 @@ public class UsuarioController {
 		return dao.actualizarUsuario(Usuario);	
 	}
 	
+	
 	@RequestMapping("/borrarUsuario")
+	@CrossOrigin(origins="*")
 	public boolean borrarUsuario(String cedula) {
+		
 		UsuarioDAO dao = new UsuarioDAO();
 		
-		return dao.borrarUsuario(Long.parseLong(cedula));
-	}*/
+		return dao.borrarusuario(Long.parseLong(cedula));
+	}
 }
