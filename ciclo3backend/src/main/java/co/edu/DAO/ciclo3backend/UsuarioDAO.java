@@ -54,11 +54,11 @@ public class UsuarioDAO {
 			while(res.next()) {
 				UsuarioVO usuario = new UsuarioVO();
 				
-				usuario.setCedula_usuario(res.getLong("Cedula_usuario"));
+				usuario.setCedula_usuario(res.getLong("cedula_usuario"));
 				usuario.setNombre_usuario(res.getString("nombre_usuario"));
 				usuario.setEmail_usuario(res.getString("email_usuario"));
-				usuario.setusuario(res.getString("nombre_usuario"));
-				usuario.setpassword(res.getString("password_usuario"));
+				usuario.setusuario(res.getString("usuario"));
+				usuario.setpassword(res.getString("password"));
 				misusuarios.add(usuario);
 			}
 			res.close();
