@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import co.edu.DTO.ciclo3backend.ProductosVO;
 
-//notanooooo
+
 public class ProductosDAO {
 	public ArrayList<ProductosVO> listaProductos() {
 		ArrayList<ProductosVO> misproductos = new ArrayList<ProductosVO>();

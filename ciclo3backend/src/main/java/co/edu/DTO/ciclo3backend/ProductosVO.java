@@ -1,6 +1,6 @@
 package co.edu.DTO.ciclo3backend;
 
-// nota
+
 public class ProductosVO {
 	
 	private long codigo_producto;
