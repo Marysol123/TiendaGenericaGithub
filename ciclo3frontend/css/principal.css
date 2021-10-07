@@ -1,0 +1,33 @@
+.barraSuperior {
+    background: rgb(0, 7, 52);
+    color: white;
+}
+
+.blanco {
+    background: rgba(255, 255, 255, 0.8);
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow:scroll;
+}
+
+.imagenFondo {
+
+    background: url(../img/tienda-generica.jpg) no-repeat center bottom fixed;
+    background-size: cover;
+    /* content: ' '; */
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+
+}
+
+
+

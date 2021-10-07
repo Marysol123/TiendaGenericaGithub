@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <!-- HOJAS DE ESTILOS PERSONALES -->
+    <link href="css/login.css" rel="stylesheet" type="text/css">
+
+    <title>Title</title>
+</head>
+<body>
+
+<!-- CONTENIDO -->
+<div class="imagenFondo">
+    <div class="blanco">
+        <div class="container">
+
+            <div class="centrado">
+                <div class="text-center">
+                    <h2>BIENVENIDOS A LA TIENDA GENERICA</h2>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-items-center m-1">
+                            <div class="col-3 me-2">
+                                <label for="usuario" class="col-form-label">Usuario</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="usuario" class="form-control"
+                                       aria-describedby="passwordHelpInline">
+                            </div>
+                        </div>
+                        <div class="row align-items-center m-1">
+                            <div class="col-3 me-2">
+                                <label for="password" class="col-form-label">Contraseña</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="password" id="password" class="form-control"
+                                       aria-describedby="passwordHelpInline">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button id="btnLoginC" class="btn btn-primary col-5 m-2">Aceptar</button>
+                            <button id="btnCancelar" class="btn btn-primary col-5 m-2">Cancelar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+
+-->
+<!-- LIBRERIAS JS ADICIONALES QUE SE REQUIEREN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- LIBRERIAS PROPIAS -->
+<script src="js/envvars.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>
