@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Productos</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    	$("#btnListarP").click(function(){
+        	$.get("http://localhost:8080/listaProductos", function(data, status){
+        		if (status == "success"){
+        			let longitud = data.length;
+        			let salidaDatos = "<table border ='1'>";
+        			salidaDatos = salidaDatos + "<tr><th>CODIGO_PRODUCTO</th><th>NOMBRE_PRODUCTO</th><th>NIT_PROVEEDOR</th><th>PRECIO</th><th>IVA_COMPRA</th></th>PRECIO_VENTA</th></tr> ";
+        			for(let i = 0; i < longitud; i++){
+        				salidaDatos = salidaDatos + "<tr>";
+        				salidaDatos = salidaDatos + "<td>"  + data[i].codigo_producto + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].nombre-producto + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].nitproveedor + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].precio_compra + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].iva_compra + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].precio_venta + "</td>";
+        				salidaDatos = salidaDatos + "</tr>";
+        			}
+        			salidaDatos = salidaDatos + "</table>";
+        			$("#listaProductos").html(salidaDatos);
+        		}
+        	});	
+    	});	    	
+    	$("#btnBuscarPcod").click(function(){
+    		let la_Cod = $("#codigo_producto ").val();   // El .val asigna el valor de la variable codigo_producto  a Cod
+    		$.post("http://localhost:8080/traerProducto", {codigo_producto : la_Cod}, function(data, status){
+    			let longitud = data.length;
+    			if (longitud > 0){
+    				$("#nombre-producto").val(data[0].nombre-producto);
+    				$("#nitproveedor").val(data[0].nitproveedor);
+    				$("#precio_compra").val(data[0].precio_compra);
+    				$("#iva_compra").val(data[0].iva_compra);
+    				$("#precio_venta").val(data[0].precio_venta);
+    			}else{
+    				$("#mensaje").html("Producto no encontrado.");
+    			}
+    		});
+    	});
+    	$("#btnCrearP").click(function(){
+    		let la_codigo = $("#codigo_producto").val();
+    		let la_nombre = $("#nombre-producto").val();
+    		let la_nit = $("#nitproveedor").val();
+    		let el_precio_compra = $("#precio_compra").val();
+    		let el_iva = $("#iva_compra").val();
+    		let el_precio_venta = $("#precio_venta").val();
+    		
+    		$.post("http://localhost:8080/crearProducto", {codigo_producto: la_codigo, nombre_producto:la_nombre, 
+    			nitproveedor: la_nit, precio_compra:el_precio_compra, iva_compra:el_iva, precio_venta:el_precio_venta}, function(data,status){
+    				if (data == true){
+    					$("#mensaje").html("El producto fue creado");
+    				}else{
+    					$("#mensaje").html("<b style = 'color:red;'>El producto No se pudo crear, ya existe!</b>");
+    				}
+    				
+    			});
+    	});
+    	$("#btnBorrarP").click(function(){
+    		let la_Cod = $("#codigo_producto").val();
+    		$.post("http://localhost:8080/borrarProducto", {codigo_producto:la_Cod}, function(data, status){
+    			if (data == true){
+    				$("#mensaje").html("El producto fue eliminado");
+    			}else{
+    				$("#mensaje").html("<b style = 'color:red;'>El producto no se pudo eliminar, NO existe!</b>");
+    			}
+    		});
+    	});
+    	$("#btnActualizarP").click(function(){
+    		let la_codigo = $("#codigo_producto").val();
+    		let la_nombre = $("#nombre-producto").val();
+    		let la_nit = $("#nitproveedor").val();
+    		let el_precio_compra = $("#precio_compra").val();
+    		let el_iva = $("#iva_compra").val();
+    		let el_precio_venta = $("#precio_venta").val();
+    		$.post("http://localhost:8080//actualizarProducto", {codigo_producto: la_codigo, nombre_producto:la_nombre, 
+    			nitproveedor: la_nit, precio_compra:el_precio_compra, iva_compra:el_iva, precio_venta:el_precio_venta}, function(data,status){
+    				if (data == true){
+    					$("#mensaje").html("El producto");
+    				}else{
+    					$("#mensaje").html("<b style = 'color:red;'>El roducto no se pudo actualizar, NO existe!</b>");
+    				}
+    			});
+    	});
+    });  //Esta cierra la etiqueta document
+</script>
+</head>
+<body>
+    <label>Codigo de producto a buscar</label><input type = "text" id ="codigo_producto"><button id = "btnBuscarCod">buscar</button><br>
+    <p id = "mensaje"></p>
+    <label>Nombre del producto</label><input type = "text" id = "nombre-producto"><br>
+    <label>NIT proveedor</label><input type = "text" id = "nitproveedor"><br>
+    <label>Precio de compra</label><input type = "text" id = "precio_compra"><br>
+    <label>IVA compra</label><input type = "text" id = "iva_compra"><br>
+     <label>Precio de venta</label><input type = "text" id = "precio_venta"><br>
+    <button id = "btnListarP">Solicitar Listado</button>
+    <button id = "btnCrearP">Crear Producto</button>
+    <button id = "btnBorrarP">Borrar Producto</button>
+    <hr>
+    	<form method="POST" enctype="multipart/from-data" action="./cargarArchivo">
+    		<label>Seleccione un archivo.csv</label>
+    		<input type="file" name="archivoCSV" accept=".csv">
+    		<input type="submit"  value="Enviar">
+    		
+    	</form>
+    
+    
+    <hr>
+    <button id = "btnActualizarP">Actualizar Producto</button>
+    <div id = "listaProductos"></div>
+</body>
+</html>
