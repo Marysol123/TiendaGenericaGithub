@@ -94,7 +94,8 @@ public class ProductosController {
 		try {
 			
 			archivoNew = deMultiPartAFile(archivoCSV);
-			fuente = new FileReader(((MultipartFile) archivoNew).getName());
+			//fuente = new FileReader(((MultipartFile) archivoNew).getName());
+			fuente = new FileReader(archivoNew.getName());
 			BufferedReader archivo = new  BufferedReader(fuente);
 			do {
 				linea = archivo.readLine();
