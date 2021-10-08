@@ -115,10 +115,11 @@ public class ProductosDAO {
 				Statement consulta = conexion.getConnection().createStatement();
 				
 				
-				String crearSql = "INSERT INTO productos (codigo_producto,  nombre_producto, nitproveedor, precio_compra, ivacompra, precio_venta) "
-						+ " VALUES ("+productos.getCodigo_producto()+", '"+productos.getNombre_producto()+"', "
-								+ "'"+productos.getNitproveedor()+"', '"+productos.getPrecio_compra()+"', "
-										+ "'"+productos.getIvacompra()+"', '"+productos.getPrecio_venta()+"";
+				String crearSql = "INSERT INTO productos (codigo_producto, ivacompra,nitproveedor, nombre_producto, precio_compra, precio_venta) "
+						+ " VALUES ("+productos.getCodigo_producto()+","+ productos.getIvacompra()+ ","
+								+productos.getNitproveedor()+",'"
+										+productos.getNombre_producto()+"',"
+										+productos.getIvacompra()+","+productos.getPrecio_venta()+")";
 				consulta.executeUpdate(crearSql);
 				consulta.close();
 				conexion.desconectar();
@@ -146,9 +147,10 @@ public class ProductosDAO {
 			Conexion conexion = new Conexion();
 			try {
 				Statement consulta = conexion.getConnection().createStatement();
-				String actualizarSql = "UPDATE productos SET codigo_producto ='"+producto.getCodigo_producto()+"', "
-					+ " nombre_producto = '"+producto.getNombre_producto()+"', precio_compra = '"+producto.getPrecio_compra()+"', "
-					    + " ivacompra = '"+producto.getIvacompra()+"' , " + "precio_venta = '"+producto.getPrecio_venta()+"' WHERE nitproveedor = "+producto.getNitproveedor()+"";
+				String actualizarSql = "UPDATE productos SET codigo_producto ="+producto.getCodigo_producto()+", "
+						+ "ivacompra = "+producto.getIvacompra()+","+ "nombre_producto = '"+producto.getNombre_producto()+"',"
+							+ "precio_compra = "+producto.getPrecio_compra()+", "+
+					     "precio_venta = "+producto.getPrecio_venta()+" WHERE nitproveedor = "+producto.getNitproveedor()+"";
 				consulta.executeUpdate(actualizarSql);
 				
 				consulta.close();

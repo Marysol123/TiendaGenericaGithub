@@ -16,10 +16,10 @@
         			for(let i = 0; i < longitud; i++){
         				salidaDatos = salidaDatos + "<tr>";
         				salidaDatos = salidaDatos + "<td>"  + data[i].codigo_producto + "</td>";
-        				salidaDatos = salidaDatos + "<td>" + data[i].nombre-producto + "</td>";
-        				salidaDatos = salidaDatos + "<td>" + data[i].nitproveedor + "</td>";
-        				salidaDatos = salidaDatos + "<td>" + data[i].precio_compra + "</td>";
         				salidaDatos = salidaDatos + "<td>" + data[i].iva_compra + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].nitproveedor + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].nombre-producto + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].precio_compra + "</td>";
         				salidaDatos = salidaDatos + "<td>" + data[i].precio_venta + "</td>";
         				salidaDatos = salidaDatos + "</tr>";
         			}
@@ -33,10 +33,10 @@
     		$.post("http://localhost:8080/traerProducto", {codigo_producto : la_Cod}, function(data, status){
     			let longitud = data.length;
     			if (longitud > 0){
-    				$("#nombre-producto").val(data[0].nombre-producto);
-    				$("#nitproveedor").val(data[0].nitproveedor);
-    				$("#precio_compra").val(data[0].precio_compra);
     				$("#iva_compra").val(data[0].iva_compra);
+    				$("#nitproveedor").val(data[0].nitproveedor);
+    				$("#nombre-producto").val(data[0].nombre-producto);
+    				$("#precio_compra").val(data[0].precio_compra);
     				$("#precio_venta").val(data[0].precio_venta);
     			}else{
     				$("#mensaje").html("Producto no encontrado.");
@@ -45,11 +45,12 @@
     	});
     	$("#btnCrearP").click(function(){
     		let la_codigo = $("#codigo_producto").val();
-    		let la_nombre = $("#nombre-producto").val();
-    		let la_nit = $("#nitproveedor").val();
-    		let el_precio_compra = $("#precio_compra").val();
     		let el_iva = $("#iva_compra").val();
+    		let la_nit = $("#nitproveedor").val();
+    		let la_nombre = $("#nombre-producto").val();
+    		let el_precio_compra = $("#precio_compra").val();
     		let el_precio_venta = $("#precio_venta").val();
+
     		
     		$.post("http://localhost:8080/crearProducto", {codigo_producto: la_codigo, nombre_producto:la_nombre, 
     			nitproveedor: la_nit, precio_compra:el_precio_compra, iva_compra:el_iva, precio_venta:el_precio_venta}, function(data,status){
@@ -73,10 +74,10 @@
     	});
     	$("#btnActualizarP").click(function(){
     		let la_codigo = $("#codigo_producto").val();
-    		let la_nombre = $("#nombre-producto").val();
-    		let la_nit = $("#nitproveedor").val();
-    		let el_precio_compra = $("#precio_compra").val();
     		let el_iva = $("#iva_compra").val();
+    		let la_nit = $("#nitproveedor").val();
+    		let la_nombre = $("#nombre-producto").val();
+    		let el_precio_compra = $("#precio_compra").val();
     		let el_precio_venta = $("#precio_venta").val();
     		$.post("http://localhost:8080//actualizarProducto", {codigo_producto: la_codigo, nombre_producto:la_nombre, 
     			nitproveedor: la_nit, precio_compra:el_precio_compra, iva_compra:el_iva, precio_venta:el_precio_venta}, function(data,status){

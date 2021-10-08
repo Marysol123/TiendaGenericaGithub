@@ -106,11 +106,11 @@ public class ProductosController {
 					ProductosVO producto = new ProductosVO();
 					
 					producto.setCodigo_producto(Long.parseLong(miLista.get(0)));
-					producto.setNombre_producto(miLista.get(1).replace("'",""));
+					producto.setIvacompra(Long.parseLong(miLista.get(1).replace("'","")));
 					producto.setNitproveedor(Long.parseLong(miLista.get(2).replace("'","")));
-					producto.setPrecio_compra(Long.parseLong(miLista.get(3).replace("'","")));
-					producto.setIvacompra(Long.parseLong(miLista.get(4).replace("'","")));
-					producto.setPrecio_venta(Long.parseLong(miLista.get(3).replace("'","")));
+					producto.setNombre_producto(miLista.get(3).replace("'",""));
+					producto.setPrecio_compra(Long.parseLong(miLista.get(4).replace("'","")));
+					producto.setPrecio_venta(Long.parseLong(miLista.get(5).replace("'","")));
 					listado.add(producto);
 				}
 			}while (linea!=null);
@@ -131,7 +131,7 @@ public class ProductosController {
 								 registro.getPrecio_venta() + "<br>";
 				
 			}
-			salida = salida + " RTA: " + (secreo?"Ok":"No se pudo insertar el listadio");
+			salida = salida + " RTA: " + (secreo?"Ok":"No se pudo insertar el listado");
 		}catch(FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}catch(IOException e2) {
