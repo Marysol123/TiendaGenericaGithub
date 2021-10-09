@@ -35,7 +35,8 @@ $(document).ready(function () {
             cache: false,
             timeout: 800000,
             success: function (resp) {
-                if (resp == true) {
+                console.log(resp);
+                if (resp == "true") {
                     swal("LISTADO CARGADO!!", "LISTADO CARGADO CON EXITO", "success");
                     limpiarFormulario();
                 } else {
