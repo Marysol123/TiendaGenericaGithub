@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <!-- HOJAS DE ESTILOS PERSONALES -->
+    <link href="css/principal.css" rel="stylesheet" type="text/css">
+    <link href="css/menu.css" rel="stylesheet" type="text/css">
+    <link href="css/ventas.css" rel="stylesheet" type="text/css">
+    <title>VENTAS</title>
+</head>
+<body>
+
+<!-- CONTENIDO -->
+<div class="imagenFondo">
+    <div class="blanco">
+        <div class="text-center barraSuperior">
+            <h3 class="mb-0">TIENDA GENERICA</h3>
+        </div>
+        <nav class="navbar navbar-expand navbar-dark barraSuperior">
+            <div class="container-fluid">
+                <div id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="usuarios.html">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="clientes.html">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="proveedores.html">Proveedores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="productos.html">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="ventas.html">Ventas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reportes.html">Reportes</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="centrado">
+                <div class="card col-12">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <label for="cedula" class="col-form-label">Cedula</label>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" id="cedula" class="form-control">
+                            </div>
+                            <div class="col-2">
+                                <button id="btnBuscarCC" class="btn btn-primary col-12">Consultar</button>
+                            </div>
+                            <div class="col-1">
+                                <label for="cliente" class="col-form-label">Cliente</label>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" readonly id="cliente" class="form-control">
+                            </div>
+                            <div class="col-1">
+                                <label for="consec" class="col-form-label">Consec:</label>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" readonly id="consec" class="form-control">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <table class="table  table-borderless">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Cod Producto</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">Nombre Producto</th>
+                                    <th scope="col">cant</th>
+                                    <th scope="col">vlr. Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="codprod1" class="form-control">
+                                    </td>
+                                    <td>
+                                        <button id="btnConProd1" class="btn btn-primary col-12">Consultar</button>
+                                    </td>
+                                    <td>
+                                        <input type="text" readonly id="nombreProd1" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input type="number" id="cantProd1" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input type="text" readonly id="totProd1" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="codprod2" class="form-control">
+                                    </td>
+                                    <td>
+                                        <button id="btnConProd2" class="btn btn-primary col-12">Consultar</button>
+                                    </td>
+                                    <td>
+                                        <input type="text" readonly id="nombreProd2" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input type="number" id="cantProd2" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input type="text" readonly id="totProd2" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="codprod3" class="form-control">
+                                    </td>
+                                    <td>
+                                        <button id="btnConProd3" class="btn btn-primary col-12">Consultar</button>
+                                    </td>
+                                    <td>
+                                        <input type="text" readonly id="nombreProd3" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input type="number" id="cantProd3" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input type="text" readonly id="totProd3" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                    </td>
+                                    <td>
+                                        Total Venta
+                                    </td>
+                                    <td>
+                                        <input type="text" readonly id="totalVenta" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                    </td>
+                                    <td>
+                                        Total IVA
+                                    </td>
+                                    <td>
+                                        <input type="text" readonly id="totalIva" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                    </td>
+                                    <td>
+                                        Total Con IVA
+                                    </td>
+                                    <td>
+                                        <input type="text" readonly id="totalConIva" class="form-control">
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <div class="row justify-content-md-center">
+                            <button id="btnCrear" class="btn btn-primary col-auto">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--
+
+-->
+<!-- LIBRERIAS JS ADICIONALES QUE SE REQUIEREN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- LIBRERIAS PROPIAS -->
+<script src="js/envvars.js"></script>
+<script src="js/ventas.js"></script>
+</body>
+</html>
