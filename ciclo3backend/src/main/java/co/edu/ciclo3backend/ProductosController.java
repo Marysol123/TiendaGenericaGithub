@@ -40,16 +40,16 @@ public class ProductosController {
 
 	@RequestMapping("/crearProducto")
 	@CrossOrigin(origins="*")
-	public boolean crearProducto(String codigo_producto, String nombre_producto, long nitproveedor, double precio_compra, double ivacompra, double precio_venta) {
+	public boolean crearProducto(String codigo_producto,  double ivacompra, long nitproveedor, String nombre_producto, double precio_compra, double precio_venta) {
 		
 		ProductosVO Producto = new ProductosVO();
 		
 
 		Producto.setCodigo_producto(Long.parseLong(codigo_producto));
-		Producto.setNombre_producto(nombre_producto);
-		Producto.setNitproveedor(nitproveedor);
-		Producto.setPrecio_compra(precio_compra);
 		Producto.setIvacompra(ivacompra);
+		Producto.setNitproveedor(nitproveedor);
+		Producto.setNombre_producto(nombre_producto);
+		Producto.setPrecio_compra(precio_compra);
 		Producto.setPrecio_venta(precio_venta);
 		
 		
@@ -60,17 +60,17 @@ public class ProductosController {
 
 	@RequestMapping("/actualizarProducto")
 	@CrossOrigin(origins="*")
-	public boolean actualizarProducto(long codigo_producto, String nombre_producto, long nitproveedor, double precio_compra, double ivacompra, double precio_venta) {
+	public boolean actualizarProducto(long codigo_producto, double ivacompra, long nitproveedor, String nombre_producto, double precio_compra, double precio_venta) {
 		
 		
 		ProductosVO Producto = new ProductosVO();
 		
 		
 		Producto.setCodigo_producto(codigo_producto);
-		Producto.setNombre_producto(nombre_producto);
-		Producto.setNitproveedor(nitproveedor);
-		Producto.setPrecio_compra(precio_compra);
 		Producto.setIvacompra(ivacompra);
+		Producto.setNitproveedor(nitproveedor);
+		Producto.setNombre_producto(nombre_producto);
+		Producto.setPrecio_compra(precio_compra);
 		Producto.setPrecio_venta(precio_venta);
 		
 		ProductosDAO dao = new ProductosDAO();
@@ -127,11 +127,11 @@ public class ProductosController {
 				secreo = dao.crearProducto(registro);				
 				
 				salida = salida + "**"+secreo+"**" + registro.getCodigo_producto() + "---" +
-								 registro.getNombre_producto() + " ---"+
-								 registro.getNitproveedor() + "---" +
-								 registro.getPrecio_compra() + "---"+
-								 registro.getIvacompra() + "---"+
-								 registro.getPrecio_venta() + "<br>";
+								registro.getIvacompra() + "---"+
+								registro.getNitproveedor() + "---" +
+								registro.getNombre_producto() + " ---"+
+								registro.getPrecio_compra() + "---"+
+								registro.getPrecio_venta() + "<br>";
 				
 			}
 			salida = salida + " RTA: " + (secreo?"Ok":"No se pudo insertar el listado");

@@ -52,8 +52,8 @@
     		let el_precio_venta = $("#precio_venta").val();
 
     		
-    		$.post("http://localhost:8080/crearProducto", {codigo_producto: la_codigo, nombre_producto:la_nombre, 
-    			nitproveedor: la_nit, precio_compra:el_precio_compra, iva_compra:el_iva, precio_venta:el_precio_venta}, function(data,status){
+    		$.post("http://localhost:8080/crearProducto", {codigo_producto: la_codigo, iva_compra:el_iva, nitproveedor: la_nit, nombre_producto:la_nombre, 
+    			precio_compra:el_precio_compra, precio_venta:el_precio_venta}, function(data,status){
     				if (data == true){
     					$("#mensaje").html("El producto fue creado");
     				}else{
@@ -79,8 +79,8 @@
     		let la_nombre = $("#nombre-producto").val();
     		let el_precio_compra = $("#precio_compra").val();
     		let el_precio_venta = $("#precio_venta").val();
-    		$.post("http://localhost:8080//actualizarProducto", {codigo_producto: la_codigo, nombre_producto:la_nombre, 
-    			nitproveedor: la_nit, precio_compra:el_precio_compra, iva_compra:el_iva, precio_venta:el_precio_venta}, function(data,status){
+    		$.post("http://localhost:8080//actualizarProducto", {codigo_producto: la_codigo, iva_compra:el_iva, nitproveedor: la_nit, nombre_producto:la_nombre, 
+    				precio_compra:el_precio_compra, precio_venta:el_precio_venta}, function(data,status){
     				if (data == true){
     					$("#mensaje").html("El producto");
     				}else{
