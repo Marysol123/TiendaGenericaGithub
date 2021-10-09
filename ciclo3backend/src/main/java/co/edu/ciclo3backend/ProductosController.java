@@ -59,6 +59,7 @@ public class ProductosController {
 	}
 
 	@RequestMapping("/actualizarProducto")
+	@CrossOrigin(origins="*")
 	public boolean actualizarProducto(long codigo_producto, String nombre_producto, long nitproveedor, double precio_compra, double ivacompra, double precio_venta) {
 		
 		
@@ -78,6 +79,7 @@ public class ProductosController {
 	}
 	
 	@RequestMapping("/borrarProducto")
+	@CrossOrigin(origins="*")
 	public boolean borrarProducto(String codigo_producto) {
 		ProductosDAO dao = new ProductosDAO();
 		
@@ -85,6 +87,7 @@ public class ProductosController {
 	}
 	
 	@RequestMapping("/cargarArchivo")
+	@CrossOrigin(origins="*")
 	public String cargarArchivo(MultipartFile archivoCSV) {
 		File archivoNew;
 		String salida="";
