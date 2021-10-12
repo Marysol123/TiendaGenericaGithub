@@ -70,6 +70,40 @@ public class UsuarioDAO {
 		}
 		return misusuarios;
 	}
+	
+	public ArrayList<UsuarioVO> buscarUsuarioPorCredenciales(String password, String user){
+		 
+		ArrayList<UsuarioVO> misusuarios = new ArrayList<UsuarioVO>();
+		Conexion conexion = new Conexion();
+		try {
+			
+			PreparedStatement consulta = conexion.getConnection().prepareStatement("SELECT * FROM usuarios WHERE password = ? and usuario = ? limit 1");
+			
+			consulta.setString(1,password);
+			consulta.setString(2,user);
+			
+			ResultSet res = consulta.executeQuery();
+			while(res.next()) {
+				UsuarioVO usuario = new UsuarioVO();
+				
+				usuario.setCedula_usuario(res.getLong("cedula_usuario"));
+				usuario.setNombre_usuario(res.getString("nombre_usuario"));
+				usuario.setEmail_usuario(res.getString("email_usuario"));
+				usuario.setusuario(res.getString("usuario"));
+				usuario.setpassword(res.getString("password"));
+				misusuarios.add(usuario);
+			}
+			res.close();
+			consulta.close();
+			conexion.desconectar();
+		}catch(Exception e){
+			System.out.println(e);
+			System.out.println("Aquí esta el error");
+		}
+		return misusuarios;
+	}
+	
+	
 	/***
 	 * Busca a un usuario por su cédula
 	 * @param cedula
@@ -136,7 +170,7 @@ public class UsuarioDAO {
 				Statement consulta = conexion.getConnection().createStatement();
 				
 				
-				String crearSql = "INSERT INTO usuarios (cedula_usuario, email_usuario, nombre_usuario, password, usuario) "
+				String crearSql = "INSERT INTO usuarios (cedula_usuario, nombre_usuario, email_usuario, usuario, password) "
 						+ " VALUES ("+usuario.getCedula_usuario()+", '"+usuario.getNombre_usuario()+"', "
 								+ "'"+usuario.getEmail_usuario()+"', '"+usuario.getusuario()+"', "
 										+ "'"+usuario.getpassword()+"')";

@@ -28,6 +28,14 @@ public class UsuarioController {
 	    return dao.buscarUsuarioCedula(cedula_usuario);
 	}
 	
+	@RequestMapping("/traerInfoUsuario")
+	@CrossOrigin(origins="*")
+	public ArrayList<UsuarioVO> buscarUsuarioPorCredenciales(String password, String usuario){
+		UsuarioDAO dao = new UsuarioDAO();
+	    
+	    return dao.buscarUsuarioPorCredenciales(password, usuario);
+	}
+	
 	@RequestMapping("/crearUsuario")
 	@CrossOrigin(origins="*")
 	public boolean crearUsuario(String cedula_usuario, String email_usuario, String nombre_usuario,
