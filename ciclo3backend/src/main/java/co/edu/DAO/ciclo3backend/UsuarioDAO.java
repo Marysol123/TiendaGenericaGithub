@@ -42,8 +42,7 @@ public class UsuarioDAO {
 	 * 
 	 * 
 	 */
-	public ArrayList<UsuarioVO> buscarUsuarioCedula(String cedula){
-		 
+	public ArrayList<UsuarioVO> buscarUsuarioCedula(String cedula){		 
 		ArrayList<UsuarioVO> misusuarios = new ArrayList<UsuarioVO>();
 		Conexion conexion = new Conexion();
 		try {

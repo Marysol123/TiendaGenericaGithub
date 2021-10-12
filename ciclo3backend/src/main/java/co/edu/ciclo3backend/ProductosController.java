@@ -105,7 +105,6 @@ public class ProductosController {
 				if (linea!=null) {
 					String tmpLinea = linea.replace("\"","'");
 					ArrayList<String> miLista = new ArrayList<String>(Arrays.asList(tmpLinea.split(",")));
-					
 					ProductosVO producto = new ProductosVO();
 					
 					producto.setCodigo_producto(Long.parseLong(miLista.get(0)));

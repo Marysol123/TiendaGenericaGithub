@@ -32,7 +32,6 @@ public class UsuarioController {
 	@CrossOrigin(origins="*")
 	public ArrayList<UsuarioVO> buscarUsuarioPorCredenciales(String password, String usuario){
 		UsuarioDAO dao = new UsuarioDAO();
-	    
 	    return dao.buscarUsuarioPorCredenciales(password, usuario);
 	}
 	
