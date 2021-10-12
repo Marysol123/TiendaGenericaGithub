@@ -115,11 +115,11 @@ public class ProductosDAO {
 				Statement consulta = conexion.getConnection().createStatement();
 				
 				
-				String crearSql = "INSERT INTO productos (codigo_producto, ivacompra,nitproveedor, nombre_producto, precio_compra, precio_venta) "
+				String crearSql = "INSERT INTO productos (codigo_producto, ivacompra, nitproveedor, nombre_producto, precio_compra, precio_venta) "
 						+ " VALUES ("+productos.getCodigo_producto()+","+ productos.getIvacompra()+ ","
 								+productos.getNitproveedor()+",'"
 										+productos.getNombre_producto()+"',"
-										+productos.getIvacompra()+","+productos.getPrecio_venta()+")";
+										+productos.getPrecio_compra()+","+productos.getPrecio_venta()+")";
 				consulta.executeUpdate(crearSql);
 				consulta.close();
 				conexion.desconectar();
