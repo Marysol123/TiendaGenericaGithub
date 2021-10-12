@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Calculos dinámicos</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var totalVenta = 0;
+    var totalIva = 0;
+    var totalConIva = 0;
+    var cedulaUsuarioBase = "prueba";
+    $(document).ready(function(){
+    	$("#ConsultarCC").click(function(){
+    		let la_cc = $("#cedula").val();   // El .val asigna el valor de la variable cedula a cc
+    		$.post("http://localhost:8080/nombreCliente", {cedula: la_cc}, function(data, status){
+    			if (data == "" ){
+    				$("#nombre").val("Cliente no encontrado");
+    				
+    			}else{
+    				$("#nombre").val(data);
+    				cedulaCliente = data;
+    			}
+    		});
+    	});
+    	$("#consultarPr1").click(function(){
+    		let codigo = $("#codigoProducto1").val();   // El .val asigna el valor de la variable cedula a cc
+    		$.post("http://localhost:8080/nombreProducto", {codigoProducto: codigo}, function(data, status){
+    			if (data == "" ){
+    				$("#nombreProducto1").val("Producto no encontrado");
+    			}else{
+    				$("#nombreProducto1").val(data);
+    			}
+    		});
+    	});
+    	$("#consultarPr2").click(function(){
+    		let codigo = $("#codigoProducto2").val();   // El .val asigna el valor de la variable cedula a cc
+    		$.post("http://localhost:8080/nombreProducto", {codigoProducto: codigo}, function(data, status){
+    			if (data == "" ){
+    				$("#nombreProducto2").val("Producto no encontrado");
+    			}else{
+    				$("#nombreProducto2").val(data);
+    			}
+    		});
+    	});
+    	$("#consultarPr3").click(function(){
+    		let codigo = $("#codigoProducto3").val();   // El .val asigna el valor de la variable cedula a cc
+    		$.post("http://localhost:8080/nombreProducto", {codigoProducto: codigo}, function(data, status){
+    			if (data == "" ){
+    				$("#nombreProducto3").val("Producto no encontrado");
+    			}else{
+    				$("#nombreProducto3").val(data);
+    			}
+    		});
+    	});
+    	
+    	function iniciar(){
+    		$("#cantidad1").val(0);
+    		$("#cantidad2").val(0);
+    		$("#cantidad3").val(0);
+    		
+    		$("#valor1").val(0);
+    		$("#valor2").val(0);
+    		$("#valor3").val(0);
+    		
+    		$("#totalVenta").val(0);
+    		$("#totalIva").val(0);
+    		$("#totalConIva").val(0);
+    	}
+    	
+    	
+    	
+    	function calculoTotal(prc, cnt, ttl){
+    		let precio = $(prc).val();
+    		let cantidad = $(cnt).val();
+    		let total = valor * cantidad;
+    		let iva = total * 0.19;
+    		$(ttl).val(total);
+    		// $(rec).val(iva.toFixed(2));
+    		totalizar();
+    	}
+    	
+    	iniciar();
+    	
+    	$("#cantidad1").change(function(){
+    		let codigo = $("#codigoProducto1").val();
+    		$.post("http://localhost:8080/traerPrecio", {codigoProducto: codigo}, function(data, status){
+    			if (data != 0){
+    				let precio = data;
+    				let cantidad = $("#cantidad1").val();
+    				let total = precio * cantidad;
+    				let iva = total * 0.19;
+    				let totalVentaIva = total + iva;
+    				$("#valor1").val(total);
+    				
+    				
+					let totalizar = parseInt($("#valor1").val()) + parseInt($("#valor2").val()) + parseInt($("#valor3").val());
+					let totalizarIva = parseFloat((totalizar * 0.19).toFixed(2));
+					let totalizarConIva = parseFloat((totalizar + totalizarIva).toFixed(2));
+    				
+                    $("#totalVenta").val(totalizar);
+                    $("#totalIva").val(totalizarIva);
+                    $("#totalConIva").val(totalizarConIva);
+                    
+                    
+    				
+    			}else{
+    				$("#valor1").val(0);
+
+					totalizar = parseInt($("#valor1").val()) + parseInt($("#valor2").val()) + parseInt($("#valor3").val()); 
+    				
+                    $("#totalVenta").val(totalizar);
+    				
+    			}
+    		});
+	  	});
+    	$("#cantidad2").change(function(){
+    		let codigo = $("#codigoProducto2").val();
+    		$.post("http://localhost:8080/traerPrecio", {codigoProducto: codigo}, function(data, status){
+    			if (data != 0){
+    				let precio = data;
+    				let cantidad = $("#cantidad2").val();
+    				let total = precio * cantidad;
+    				let iva = total * 0.19;
+    				let totalVentaIva = total + iva;
+    				$("#valor2").val(total);
+    				
+    				let totalizar = parseInt($("#valor1").val()) + parseInt($("#valor2").val()) + parseInt($("#valor3").val());
+					let totalizarIva = parseFloat((totalizar * 0.19).toFixed(2));
+					let totalizarConIva = parseFloat((totalizar + totalizarIva).toFixed(2));
+    				
+                    $("#totalVenta").val(totalizar);
+                    $("#totalIva").val(totalizarIva);
+                    $("#totalConIva").val(totalizarConIva);
+    			}else{
+    				$("#valor2").val(0);
+    				
+					totalizar = parseInt($("#valor1").val()) + parseInt($("#valor2").val()) + parseInt($("#valor3").val()); 
+    				
+                    $("#totalVenta").val(totalizar);
+    				
+    			}
+    		});
+	  	});
+    	$("#cantidad3").change(function(){
+    		let codigo = $("#codigoProducto3").val();
+    		$.post("http://localhost:8080/traerPrecio", {codigoProducto: codigo}, function(data, status){
+    			if (data != 0){
+    				let precio = data;
+    				let cantidad = $("#cantidad3").val();
+    				let total = precio * cantidad;
+    				let iva = total * 0.19;
+    				let totalVentaIva = total + iva;
+    				$("#valor3").val(total);
+    				
+    				let totalizar = parseInt($("#valor1").val()) + parseInt($("#valor2").val()) + parseInt($("#valor3").val());
+					let totalizarIva = parseFloat((totalizar * 0.19).toFixed(2));
+					let totalizarConIva = parseFloat((totalizar + totalizarIva).toFixed(2));
+    				
+                    $("#totalVenta").val(totalizar);
+                    $("#totalIva").val(totalizarIva);
+                    $("#totalConIva").val(totalizarConIva);
+    				
+    			}else{
+    				$("#valor3").val(0);
+    				
+					let totalizar = parseInt($("#valor1").val()) + parseInt($("#valor2").val()) + parseInt($("#valor3").val()); 
+					
+    				
+                    $("#totalVenta").val(totalizar);
+                    $("#")
+    				
+    			}
+    		});
+	  	});
+    	$("#confirmarVenta").click(function(){
+    		let la_cedula_cliente = $("#cedula").val();
+    		let la_cedula_usuario = cedulaUsuarioBase;
+    		let iva_venta = $("#totalIva").val();
+    		let total_venta = $("#totalConIva").val();
+    		let valor_venta = $("#totalVenta").val();
+    		// Se creó una variable global para usuario, total venta es con iva y valor venta es sin iva
+    		$.post("http://localhost:8080/confirmarVenta", {cedulaCliente:la_cedula_cliente, cedulaUsuario:la_cedula_usuario,
+    			 ivaVenta:iva_venta, totalVenta:total_venta, valorVenta:valor_venta}, function(data, status){
+    				 if (data != 0){
+     					$("#consecutivo").val(data);
+     					$("#mensaje").val("Registro exitoso!");
+     					
+     					let la_cantidad1 = $("#cantidad1").val();
+     					let la_cantidad2 = $("#cantidad2").val();
+     					let la_cantidad3 = $("#cantidad3").val();
+     					
+     					let el_codigo1 = $("#codigoProducto1").val();
+     					let el_codigo2 = $("#codigoProducto2").val();
+     					let el_codigo3 = $("#codigoProducto3").val();
+     					
+     					let el_codigo_venta = data;
+     					
+     					let el_valor_venta1 =  $("#valor1").val();
+     					let el_valor_venta2 =  $("#valor2").val();
+     					let el_valor_venta3 =  $("#valor3").val();
+     					
+     					// En el dao calcularemos el iva de cada uno y el valor total
+     					
+     					$.post("http://localhost:8080/registroVentas",{cantidad1:la_cantidad1, cantidad2:la_cantidad2, 
+     						cantidad3:la_cantidad3, codigo1:el_codigo1, codigo2:el_codigo2, codigo3:el_codigo3, 
+     						codigoVenta:el_codigo_venta, valorVenta1:el_valor_venta1, valorVenta2:el_valor_venta2, 
+     						valorVenta3:el_valor_venta3},function(data, status){
+     						if (data == true){
+     							$("#mensaje").val("Registro exitoso!");
+     						}else{
+     							$("#mensaje").val("No se pudieron registrar las ventas!");	
+     						}
+     					});
+     					
+     					
+     				}else{
+     					$("#consecutivo").val("No se pudo generar");
+     				}
+    		});
+    	});
+    	
+    }); // Aquí se cierra el document
+</script>
+</head>
+<body>
+<label>Cédula</label><input type = "text" id ="cedula"><button id = "ConsultarCC">Consultar</button>
+<label>Cliente</label><input type = "text" id ="nombre">
+<label>Consec.</label><input type = "text" id ="consecutivo">
+
+    <table>
+        <tr>
+            <th>Cod. Producto</th>
+            <th>Nombre Producto</th>
+            <th>Cant.</th>
+            <th>Vlr. Total</th>
+        </tr>
+        <!-- Se crearon código producto como texto, toca hacer parseo -->
+        <tr>
+            <td><input type = "text" value = "" name = "codigoProducto1" id ="codigoProducto1"><button id = "consultarPr1">Consultar</button></td>
+            <td><input type = "text" value = "" name = "nombreProducto1" id ="nombreProducto1" disabled></td>
+            <td><input type = "number" value = "" name = "cantidad1" id ="cantidad1"></td>
+            <td><input type = "number" value = "" name = "valor1" id ="valor1" disabled></td>
+        </tr>
+        <tr>
+            <td><input type = "text" value = "" name = "codigoProducto2" id ="codigoProducto2"><button id = "consultarPr2">Consultar</button></td>
+            <td><input type = "text" value = "" name = "nombreProducto2" id ="nombreProducto2" disabled></td>
+            <td><input type = "number" value = "" name = "cantidad2" id ="cantidad2"></td>
+            <td><input type = "number" value = "" name = "valor2" id ="valor2" disabled></td>
+        </tr>    
+        <tr>
+        
+            <td><input type = "text" value = "" name = "codigoProducto3" id ="codigoProducto3"><button id = "consultarPr3">Consultar</button></td>
+            <td><input type = "text" value = "" name = "nombreProducto1" id ="nombreProducto3" disabled></td>
+            <td><input type = "number" value = "" name = "cantidad3" id ="cantidad3"></td>
+            <td><input type = "number" value = "" name = "valor3" id ="valor3" disabled></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total Venta</td>
+            <td><input type = "number" value = "" name = "totalVenta" id ="totalVenta" disabled></td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total IVA</td>
+            <td><input type = "number" value = "" name = "totalIva" id ="totalIva" disabled></td></td>
+        </tr>
+        <tr>
+            <td><p id = "mensaje"></p></td>
+            <td><button id = "confirmarVenta">Confirmar</button></td>
+            <td>Total con IVA</td>
+            <td><input type = "number" value = "" name = "totalConIva" id ="totalConIva" disabled></td></td>
+        </tr>
+    </table>
+    
+</body>
+</html>
