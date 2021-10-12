@@ -8,7 +8,7 @@
     var totalVenta = 0;
     var totalIva = 0;
     var totalConIva = 0;
-    var cedulaUsuarioBase = "prueba";
+    var cedulaUsuarioBase = "10";
     $(document).ready(function(){
     	$("#ConsultarCC").click(function(){
     		let la_cc = $("#cedula").val();   // El .val asigna el valor de la variable cedula a cc
@@ -167,11 +167,11 @@
 					
     				
                     $("#totalVenta").val(totalizar);
-                    $("#")
-    				
+                    
     			}
     		});
 	  	});
+    	
     	$("#confirmarVenta").click(function(){
     		let la_cedula_cliente = $("#cedula").val();
     		let la_cedula_usuario = cedulaUsuarioBase;
@@ -183,7 +183,9 @@
     			 ivaVenta:iva_venta, totalVenta:total_venta, valorVenta:valor_venta}, function(data, status){
     				 if (data != 0){
      					$("#consecutivo").val(data);
-     					$("#mensaje").val("Registro exitoso!");
+     					$("#mensaje").html("Registro exitoso!");
+     					
+     					
      					
      					let la_cantidad1 = $("#cantidad1").val();
      					let la_cantidad2 = $("#cantidad2").val();
@@ -206,9 +208,9 @@
      						codigoVenta:el_codigo_venta, valorVenta1:el_valor_venta1, valorVenta2:el_valor_venta2, 
      						valorVenta3:el_valor_venta3},function(data, status){
      						if (data == true){
-     							$("#mensaje").val("Registro exitoso!");
+     							$("#mensaje").html("Registro exitoso!");
      						}else{
-     							$("#mensaje").val("No se pudieron registrar las ventas!");	
+     							$("#mensaje").html("No se pudieron registrar las ventas!");	
      						}
      					});
      					
@@ -218,6 +220,7 @@
      				}
     		});
     	});
+    	
     	
     }); // Aquí se cierra el document
 </script>

@@ -73,7 +73,9 @@ public class VentasDAO {
 		Conexion conexion = new Conexion();
 			
 		try {	
-			String insertar = "INSERT INTO ventas VALUES(NULL, "+Long.parseLong(cedulaCliente)+", "+Long.parseLong(cedulaUsuario)+","
+			
+			String insertar = "INSERT INTO ventas (cedula_cliente, cedula_usuario, ivaventa, total_venta, valor_venta)  "
+					+ "VALUES("+Long.parseLong(cedulaCliente)+", "+Long.parseLong(cedulaUsuario)+","
 					+ " "+ivaVenta+", "+totalVenta+", "+valorVenta+" )";
 			PreparedStatement consulta = conexion.getConnection().prepareStatement(insertar, Statement.RETURN_GENERATED_KEYS);	
 			int affectedRows = consulta.executeUpdate();
@@ -109,23 +111,27 @@ public class VentasDAO {
 			double valorIva1 = valorVenta1 * 0.19;
 			double valorTotal1 = valorVenta1 + valorIva1;
 			
-			String crearSql1 = "INSERT INTO detalle_ventas (codigo_detalle_venta, cantidad_producto, codigo_producto, "
+			String crearSql1 = "INSERT INTO detalle_ventas (cantidad_producto, codigo_producto, "
 					+ " codigo_venta, valor_total, valor_venta, valoriva) "
-					+ " VALUES (NULL, "+cantidad1+", "+codigo1+" ,"+codigoVenta+", "+valorTotal1+", "+valorVenta1+", "+valorIva1+")";
+					+ " VALUES ("+cantidad1+", "+codigo1+" ,"+codigoVenta+", "+valorTotal1+", "+valorVenta1+", "+valorIva1+")";
+			
+			consulta.executeUpdate(crearSql1);
 			
 			double valorIva2 = valorVenta2 * 0.19;
 			double valorTotal2 = valorVenta2 + valorIva2;
 			
-			String crearSql2 = "INSERT INTO detalle_ventas (codigo_detalle_venta, cantidad_producto, codigo_producto, "
+			String crearSql2 = "INSERT INTO detalle_ventas (cantidad_producto, codigo_producto, "
 					+ " codigo_venta, valor_total, valor_venta, valoriva) "
-					+ " VALUES (NULL, "+cantidad2+", "+codigo2+" ,"+codigoVenta+", "+valorTotal2+", "+valorVenta2+", "+valorIva2+")";
+					+ " VALUES ("+cantidad2+", "+codigo2+" ,"+codigoVenta+", "+valorTotal2+", "+valorVenta2+", "+valorIva2+")";
+			
+			consulta.executeUpdate(crearSql2);
 			
 			double valorIva3 = valorVenta3 * 0.19;
 			double valorTotal3 = valorVenta3 + valorIva3;
 			
-			String crearSql3 = "INSERT INTO detalle_ventas (codigo_detalle_venta, cantidad_producto, codigo_producto, "
+			String crearSql3 = "INSERT INTO detalle_ventas (cantidad_producto, codigo_producto, "
 					+ " codigo_venta, valor_total, valor_venta, valoriva) "
-					+ " VALUES (NULL, "+cantidad3+", "+codigo3+" ,"+codigoVenta+", "+valorTotal3+", "+valorVenta3+", "+valorIva3+")";
+					+ " VALUES ("+cantidad3+", "+codigo3+" ,"+codigoVenta+", "+valorTotal3+", "+valorVenta3+", "+valorIva3+")";
 			
 			consulta.executeUpdate(crearSql3);
 			
