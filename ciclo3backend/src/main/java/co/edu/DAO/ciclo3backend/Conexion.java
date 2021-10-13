@@ -3,12 +3,19 @@ package co.edu.DAO.ciclo3backend;
 import java.sql.*;
 
 public class Conexion {
+	
+	
 	static String db="tiendagenerica";
 	static String login ="dba";
 	static String password ="Mtic@2021";
-	
-	
 	static String url="jdbc:mysql://localhost/"+db;
+	
+	/*
+	static String db="tiendagenericag02";
+	static String login ="admin";
+	static String password ="grupo54a";
+	static String url="jdbc:mariadb://dbgrupo54.c47knbsonjdi.us-east-2.rds.amazonaws.com/"+db;
+	*/
 	
 	Connection connection = null;
 	

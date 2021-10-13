@@ -16,18 +16,21 @@ public class VentasController {
 		return dao.buscarClienteCedula(cedula);
 	}
 	@RequestMapping("/nombreProducto")
+	@CrossOrigin(origins="*")
 	public String buscarNombreProducto(String codigoProducto) {
 		VentasDAO dao = new VentasDAO();
 		
 		return dao.buscarNombreProducto(codigoProducto);
 	}
 	@RequestMapping("/traerPrecio")
+	@CrossOrigin(origins="*")
 	public float traerPrecio(String codigoProducto) {
 		VentasDAO dao = new VentasDAO();
 		
 		return dao.traerPrecio(codigoProducto);
 	}
 	@RequestMapping("/confirmarVenta")
+	@CrossOrigin(origins="*")
 	public int confirmarVenta(String cedulaCliente, String cedulaUsuario, String ivaVenta, String totalVenta, String valorVenta){
 		
 		VentasDAO dao = new VentasDAO();
@@ -38,6 +41,7 @@ public class VentasController {
 	}
 	
 	@RequestMapping("/registroVentas")
+	@CrossOrigin(origins="*")
 	public boolean registroVentas(String cantidad1, String cantidad2, String cantidad3, String codigo1, String codigo2, 
 			String codigo3, String codigoVenta, String valorVenta1, String valorVenta2, String valorVenta3 ) {
 		VentasDAO dao = new VentasDAO();
