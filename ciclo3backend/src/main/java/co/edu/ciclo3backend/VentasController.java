@@ -1,13 +1,24 @@
 package co.edu.ciclo3backend;
 
+import java.util.ArrayList;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.DAO.ciclo3backend.VentasDAO;
+import co.edu.DTO.ciclo3backend.VentasVO;
 
 @RestController
 public class VentasController {
+	@RequestMapping("/listaVentas")
+	@CrossOrigin(origins="*")
+	public ArrayList<VentasVO> listaDeVentas(){
+		VentasDAO dao = new VentasDAO();
+	    
+	    return dao.listaDeVentas();
+	}
+	
 	@RequestMapping("/nombreCliente")
 	@CrossOrigin(origins="*")
 	public String buscarClienteCedula(String cedula) {

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Listado de clientes</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script> 
+    $(document).ready(function(){
+    	$("#btnListarVentas").click(function(){
+    		$.get("http://localhost:8080/listaVentas", function(data, status){
+    			if (status == "success"){
+        			let longitud = data.length;
+        			let salidaDatos = "<table border ='1'>";
+        			salidaDatos = salidaDatos + "<tr><th>Cedula</th><th>Nombre</th><th>Valor Total Ventas</th></tr>";
+        			for(let i = 0; i < longitud; i++){
+        				salidaDatos = salidaDatos + "<tr>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].cedula_cliente + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].nombre_cliente + "</td>";
+        				salidaDatos = salidaDatos + "<td>" + data[i].valorTotalVentas + "</td>";
+        				salidaDatos = salidaDatos + "</tr>";
+        			}
+        			salidaDatos = salidaDatos + "</table>";
+        			$("#listaVentas").html(salidaDatos);
+        		}
+    			
+    		});
+    	});
+    });
+
+
+
+</script>
+</head>
+
+
+
+
+<body>
+    <button id = "btnListarVentas">Total de Ventas por Cliente</button>
+    
+    
+    
+</body>
+</html>

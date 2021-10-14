@@ -4,10 +4,57 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import co.edu.DTO.ciclo3backend.UsuarioVO;
+import co.edu.DTO.ciclo3backend.VentasVO;
 
 public class VentasDAO {
+	public ArrayList<VentasVO> listaDeVentas() {
+		ArrayList<VentasVO> misVentas = new ArrayList<VentasVO>();
+		Conexion conexion = new Conexion();
+		try {
+			PreparedStatement consulta = conexion.getConnection().prepareStatement("SELECT cedula_cliente FROM ventas");
+			ResultSet res = consulta.executeQuery();
+			Set<String> cedulas = new HashSet<String> (); 
+			while (res.next()) {
+				String cedula = res.getString("cedula_cliente");
+				cedulas.add(cedula);
+			}
+			res.close();
+			consulta.close();
+			
+			
+			for (String cedula : cedulas) {
+				PreparedStatement consulta2 = conexion.getConnection().prepareStatement("SELECT valor_venta FROM ventas "
+						+ "WHERE cedula_cliente = '"+cedula+"'   ");
+				ResultSet res2 = consulta2.executeQuery();
+				double valor_venta = 0;	
+				
+				while(res2.next()) {
+					valor_venta = valor_venta + res2.getDouble("valor_venta");
+				}
+				VentasVO ventas = new VentasVO();
+				String nombre = this.buscarClienteCedula(cedula);
+				ventas.setCedula_cliente(Long.parseLong(cedula));
+				ventas.setNombre_cliente(nombre);
+				ventas.setValorTotalVentas((long) valor_venta);
+				misVentas.add(ventas);
+				
+				res2.close();
+				consulta2.close();
+			}
+			
+			conexion.desconectar();
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return misVentas;
+	}
+	
+	
 	public String buscarClienteCedula(String cedula) {
 		String nombre ="";
 		Conexion conexion = new Conexion();
