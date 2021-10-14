@@ -53,14 +53,19 @@ public class VentasController {
 	
 	@RequestMapping("/registroVentas")
 	@CrossOrigin(origins="*")
-	public boolean registroVentas(String cantidad1, String cantidad2, String cantidad3, String codigo1, String codigo2, 
-			String codigo3, String codigoVenta, String valorVenta1, String valorVenta2, String valorVenta3 ) {
+	public int registroVentas(String cedula_cliente, String cedula_usuario, String ivaventa, String total_venta, String valor_venta, 
+			String cantidad_producto1, String codigo_producto1, String valor_venta1, String valoriva1, String valor_total1,
+			String cantidad_producto2, String codigo_producto2, String valor_venta2, String valoriva2, String valor_total2,
+			String cantidad_producto3, String codigo_producto3, String valor_venta3, String valoriva3, String valor_total3) {
 		VentasDAO dao = new VentasDAO();
-		return dao.registroVentas(Integer.parseInt(cantidad1), Integer.parseInt(cantidad2), Integer.parseInt(cantidad3), 
-				Long.parseLong(codigo1), Long.parseLong(codigo2), Long.parseLong(codigo3), Long.parseLong(codigoVenta), 
-				Double.parseDouble(valorVenta1), Double.parseDouble(valorVenta2), Double.parseDouble(valorVenta3));
-		  
-			
+		
+		return dao.registroVentas(Long.parseLong(cedula_cliente), Long.parseLong(cedula_usuario), Double.parseDouble(ivaventa), Double.parseDouble(total_venta), Double.parseDouble(valor_venta),  
+				Integer.parseInt(cantidad_producto1), Long.parseLong(codigo_producto1), Double.parseDouble(valor_venta1), Double.parseDouble(valoriva1), Double.parseDouble(valor_total1),
+				Integer.parseInt(cantidad_producto2), Long.parseLong(codigo_producto2), Double.parseDouble(valor_venta2), Double.parseDouble(valoriva2), Double.parseDouble(valor_total2),
+				Integer.parseInt(cantidad_producto3), Long.parseLong(codigo_producto3), Double.parseDouble(valor_venta3), Double.parseDouble(valoriva3), Double.parseDouble(valor_total3)
+				);
+		
+		
 	}
 	
 

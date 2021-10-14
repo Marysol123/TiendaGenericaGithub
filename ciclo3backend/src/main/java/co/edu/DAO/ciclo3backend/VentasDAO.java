@@ -1,7 +1,7 @@
 package co.edu.DAO.ciclo3backend;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -146,52 +146,92 @@ public class VentasDAO {
 		return rta;
 	}
 	
-	public boolean registroVentas(int cantidad1, int cantidad2, int cantidad3, Long codigo1, Long codigo2, Long codigo3, 
-			Long codigoVenta, double valorVenta1, double valorVenta2, double valorVenta3) {
-		boolean rta = false;
+	public int registroVentas(
+			long cedula_cliente, long cedula_usuario, double ivaventa, double total_venta, double valor_venta,  
+			int cantidad_producto1, long codigo_producto1, double valor_venta1, double valoriva1, double valor_total1,
+			int cantidad_producto2, long codigo_producto2, double valor_venta2, double valoriva2, double valor_total2,
+			int cantidad_producto3, long codigo_producto3, double valor_venta3, double valoriva3, double valor_total3
+			) {
+		int rta = 0;
 		
 		Conexion conexion = new Conexion();
 		try {
+			conexion.getConnection().setAutoCommit(false);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
 			
-			Statement consulta = conexion.getConnection().createStatement();
+			String insertVentas = "INSERT INTO ventas(cedula_cliente, "
+					+ "cedula_usuario, ivaventa, total_venta, valor_venta) "
+					+ "VALUES (?,?,?,?,?)";
 			
-			double valorIva1 = valorVenta1 * 0.19;
-			double valorTotal1 = valorVenta1 + valorIva1;
+			PreparedStatement consulta = conexion.getConnection().prepareStatement(insertVentas, Statement.RETURN_GENERATED_KEYS);
 			
-			String crearSql1 = "INSERT INTO detalle_ventas (cantidad_producto, codigo_producto, "
-					+ " codigo_venta, valor_total, valor_venta, valoriva) "
-					+ " VALUES ("+cantidad1+", "+codigo1+" ,"+codigoVenta+", "+valorTotal1+", "+valorVenta1+", "+valorIva1+")";
+			consulta.setLong(1, cedula_cliente);
+			consulta.setLong(2, cedula_usuario);
+			consulta.setDouble(3, ivaventa);
+			consulta.setDouble(4, total_venta);
+			consulta.setDouble(5, valor_venta);
 			
-			consulta.executeUpdate(crearSql1);
+			int rowAffected = consulta.executeUpdate();
 			
-			double valorIva2 = valorVenta2 * 0.19;
-			double valorTotal2 = valorVenta2 + valorIva2;
-			
-			String crearSql2 = "INSERT INTO detalle_ventas (cantidad_producto, codigo_producto, "
-					+ " codigo_venta, valor_total, valor_venta, valoriva) "
-					+ " VALUES ("+cantidad2+", "+codigo2+" ,"+codigoVenta+", "+valorTotal2+", "+valorVenta2+", "+valorIva2+")";
-			
-			consulta.executeUpdate(crearSql2);
-			
-			double valorIva3 = valorVenta3 * 0.19;
-			double valorTotal3 = valorVenta3 + valorIva3;
-			
-			String crearSql3 = "INSERT INTO detalle_ventas (cantidad_producto, codigo_producto, "
-					+ " codigo_venta, valor_total, valor_venta, valoriva) "
-					+ " VALUES ("+cantidad3+", "+codigo3+" ,"+codigoVenta+", "+valorTotal3+", "+valorVenta3+", "+valorIva3+")";
-			
-			consulta.executeUpdate(crearSql3);
-			
+			// Obtener PK generada
+			ResultSet rs = consulta.getGeneratedKeys();
+            int candidateId = 0;
+            if(rs.next())
+                candidateId = rs.getInt(1);
+            
+            if(rowAffected == 1)
+            {
+            	// INGRESO LOS DETALLADOS DE VENTAS
+            	String insertDetalle = "INSERT INTO detalle_ventas(cantidad_producto, "
+    					+ "codigo_producto, codigo_venta, valor_total, valor_venta, valoriva) "
+    					+ "VALUES (?,?,?,?,?,?)";
+            	
+				if(codigo_producto1 != -1) {
+					consulta = conexion.getConnection().prepareStatement(insertDetalle);
+	    			consulta.setInt(1, cantidad_producto1);
+	    			consulta.setLong(2, codigo_producto1);
+	    			consulta.setLong(3, candidateId);
+	    			consulta.setDouble(4, valor_total1);
+	    			consulta.setDouble(5, valor_venta1);
+	    			consulta.setDouble(6, valoriva1);
+	    			consulta.executeUpdate();
+				}
+				if(codigo_producto2 != -1) {
+					consulta = conexion.getConnection().prepareStatement(insertDetalle);
+	    			consulta.setInt(1, cantidad_producto2);
+	    			consulta.setLong(2, codigo_producto2);
+	    			consulta.setLong(3, candidateId);
+	    			consulta.setDouble(4, valor_total2);
+	    			consulta.setDouble(5, valor_venta2);
+	    			consulta.setDouble(6, valoriva2);
+	    			consulta.executeUpdate();
+				}
+				if(codigo_producto3 != -1) {
+					consulta = conexion.getConnection().prepareStatement(insertDetalle);
+	    			consulta.setInt(1, cantidad_producto3);
+	    			consulta.setLong(2, codigo_producto3);
+	    			consulta.setLong(3, candidateId);
+	    			consulta.setDouble(4, valor_total3);
+	    			consulta.setDouble(5, valor_venta3);
+	    			consulta.setDouble(6, valoriva3);
+	    			consulta.executeUpdate();
+				}
+				conexion.getConnection().commit();
+				rta = candidateId;
+            } else {
+            	conexion.getConnection().rollback();
+            }
 			consulta.close();
 			conexion.desconectar();
-			rta = true;
 		}catch(SQLException e) {
 			System.out.println(e);
-		}
-		
+		}		
 		return rta;
-		
-		
+
 	}
 	
 	

@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+
     /**
      * Buscar Usuario por documento
      */
@@ -48,19 +49,19 @@ $(document).ready(function () {
      */
     $("#btnCrear").click(function () {
         let la_cc = $("#cedula").val();
-        if(!notificarVacio(la_cc)) return;
+        if (!notificarVacio(la_cc)) return;
         let email = $("#email").val();
-        if(!notificarVacio(email)) return;
+        if (!notificarVacio(email)) return;
         let nombre_usuario = $("#nombre").val();
-        if(!notificarVacio(nombre_usuario)) return;
+        if (!notificarVacio(nombre_usuario)) return;
         let usuario = $("#usuario").val();
-        if(!notificarVacio(usuario)) return;
+        if (!notificarVacio(usuario)) return;
         let password = $("#password").val();
-        if(!notificarVacio(password)) return;
+        if (!notificarVacio(password)) return;
 
         $.post(urlBackend + "crearUsuario", {
-            cedula_usuario: la_cc,  email_usuario: email,
-            nombre_usuario:nombre_usuario, usuario: usuario,
+            cedula_usuario: la_cc, email_usuario: email,
+            nombre_usuario: nombre_usuario, usuario: usuario,
             password: password
         }, function (data, status) {
             if (data == true) {
@@ -80,15 +81,15 @@ $(document).ready(function () {
      */
     $("#btnBorrar").click(function () {
         let la_cc = $("#cedula").val();
-        if(!notificarVacio(la_cc)) return;
+        if (!notificarVacio(la_cc)) return;
         let email = $("#email").val();
-        if(!notificarVacio(email)) return;
+        if (!notificarVacio(email)) return;
         let nombre_usuario = $("#nombre").val();
-        if(!notificarVacio(nombre_usuario)) return;
+        if (!notificarVacio(nombre_usuario)) return;
         let usuario = $("#usuario").val();
-        if(!notificarVacio(usuario)) return;
+        if (!notificarVacio(usuario)) return;
         let password = $("#password").val();
-        if(!notificarVacio(password)) return;
+        if (!notificarVacio(password)) return;
         $.post(urlBackend + "borrarUsuario", {cedula: la_cc}, function (data, status) {
             if (data == true) {
                 swal("USUARIO ELIMINADO!!", "USUARIO ELIMINADO CON EXITO", "success");
@@ -105,18 +106,18 @@ $(document).ready(function () {
      */
     $("#btnActualizar").click(function () {
         let la_cc = $("#cedula").val();
-        if(!notificarVacio(la_cc)) return;
+        if (!notificarVacio(la_cc)) return;
         let email = $("#email").val();
-        if(!notificarVacio(email)) return;
+        if (!notificarVacio(email)) return;
         let nombre_usuario = $("#nombre").val();
-        if(!notificarVacio(nombre_usuario)) return;
+        if (!notificarVacio(nombre_usuario)) return;
         let usuario = $("#usuario").val();
-        if(!notificarVacio(usuario)) return;
+        if (!notificarVacio(usuario)) return;
         let password = $("#password").val();
-        if(!notificarVacio(password)) return;
+        if (!notificarVacio(password)) return;
         $.post(urlBackend + "actualizarUsuario", {
-            cedula_usuario: la_cc,  email_usuario: email,
-            nombre_usuario:nombre_usuario, usuario: usuario,
+            cedula_usuario: la_cc, email_usuario: email,
+            nombre_usuario: nombre_usuario, usuario: usuario,
             password: password
         }, function (data, status) {
             if (data == true) {
