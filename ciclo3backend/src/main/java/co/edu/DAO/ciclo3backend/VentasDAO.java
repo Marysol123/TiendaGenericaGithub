@@ -28,13 +28,13 @@ public class VentasDAO {
 			
 			
 			for (String cedula : cedulas) {
-				PreparedStatement consulta2 = conexion.getConnection().prepareStatement("SELECT valor_venta FROM ventas "
+				PreparedStatement consulta2 = conexion.getConnection().prepareStatement("SELECT total_venta FROM ventas "
 						+ "WHERE cedula_cliente = '"+cedula+"'   ");
 				ResultSet res2 = consulta2.executeQuery();
 				double valor_venta = 0;	
 				
 				while(res2.next()) {
-					valor_venta = valor_venta + res2.getDouble("valor_venta");
+					valor_venta = valor_venta + res2.getDouble("total_venta");
 				}
 				VentasVO ventas = new VentasVO();
 				String nombre = this.buscarClienteCedula(cedula);

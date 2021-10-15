@@ -23,8 +23,8 @@ public class UsuarioDAO {
 				usuario.setCedula_usuario(res.getLong("cedula_usuario"));
 				usuario.setEmail_usuario(res.getString("email_usuario"));
 				usuario.setNombre_usuario(res.getString("nombre_usuario"));
-				usuario.setusuario(res.getString("password"));
-				usuario.setpassword(res.getString("usuario"));
+				usuario.setusuario(res.getString("usuario"));
+				usuario.setpassword(res.getString("password"));
 				misusuarios.add(usuario);
 			}
 			res.close();

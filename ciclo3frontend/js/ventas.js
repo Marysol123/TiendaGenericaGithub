@@ -306,7 +306,7 @@ $(document).ready(function () {
                 valor_total3: valor_total3,
             },
             function (data, status) {
-                if (data >= 0) {
+                if (data > 0) {
                     swal("OK", "VENTA REGISTRADA", "success");
                     $("#consec").val(data)
                 } else {
